@@ -1,0 +1,18 @@
+﻿<Window x:Class="ScadaOtrila.Guis.Tags.TagTrend"
+        xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+        xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+        xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
+        xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
+         xmlns:oxy="http://oxyplot.codeplex.com"
+        mc:Ignorable="d"
+        Title="TagTrends" Height="450" Width="800">
+    <Grid>
+        <oxy:Plot x:Name="Plot1" Title="Historia e vlerave" Model="{Binding PlotModel}" BorderBrush="Black" Margin="0,33,0,0" BorderThickness="2"></oxy:Plot>
+        <DatePicker Name="dateFrom" Margin="54,5,0,0" VerticalAlignment="Top" RenderTransformOrigin="1.086,0.36" HorizontalAlignment="Left" Width="153"/>
+        <DatePicker Name="dateTo" Margin="244,5,0,0" VerticalAlignment="Top" HorizontalAlignment="Left" Width="153"/>
+        <Label Content="From" Height="24" VerticalAlignment="Top" Margin="8,4,743,0"/>
+        <Label Content="To" Height="24" VerticalAlignment="Top" Margin="212,5,0,0" RenderTransformOrigin="2.359,0.521" HorizontalAlignment="Left" Width="27"/>
+        <ComboBox Name="cmbTagHis" SelectionChanged="cmbTagHis_SelectionChanged" Height="24" Margin="0,4,10,0" VerticalAlignment="Top" HorizontalAlignment="Right" Width="157"/>
+        <Button Name="btnSavetoPDF" Click="btnSavetoPDF_Click" Content="Print" HorizontalAlignment="Left" Height="24" Margin="407,5,0,0" VerticalAlignment="Top" Width="110" RenderTransformOrigin="0.833,0.583"/>
+    </Grid>
+</Window>

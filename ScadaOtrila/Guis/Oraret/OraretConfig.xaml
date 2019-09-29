@@ -1,0 +1,60 @@
+﻿<Window x:Class="ScadaOtrila.Guis.Oraret.OraretConfig"
+        xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+        xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+        xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
+        xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
+        xmlns:local="clr-namespace:ScadaOtrila.Guis.Oraret"
+        mc:Ignorable="d"
+        ResizeMode="NoResize"
+        Title="Konfigurimi i orareve" Height="391" Width="621">
+    <Grid>
+        <Button x:Name="btnShlyejOrar" Content="SHLYEJ ORARIN" HorizontalAlignment="Left" Margin="488,299,0,0" VerticalAlignment="Top" Width="111" Height="41"/>
+        <Button x:Name="btnKrijoOrar" Content="KRIJO ORAR" HorizontalAlignment="Left" Margin="436,45,0,0" VerticalAlignment="Top" Width="131" Height="25" Click="BtnKrijoOrar_Click" />
+        <DatePicker Name="dateFrom" Margin="113,15,0,0" VerticalAlignment="Top" RenderTransformOrigin="0.503,0.51" HorizontalAlignment="Left" Width="153" Height="26"/>
+        <DatePicker Name="dateTo" Margin="113,46,0,0" VerticalAlignment="Top" HorizontalAlignment="Left" Width="153" Height="26"/>
+        <Label Content="Data e fillimit" HorizontalAlignment="Left" Margin="18,15,0,0" VerticalAlignment="Top" Width="95" Height="25"/>
+        <Label Content="Data e mbarimit" HorizontalAlignment="Left" Margin="18,46,0,0" VerticalAlignment="Top"/>
+        <TextBox x:Name="txtPerseritja" HorizontalAlignment="Left" Height="25" Margin="337,15,0,0" TextWrapping="Wrap" Text="1" VerticalAlignment="Top" Width="94"/>
+        <Label Content="Perseritja" HorizontalAlignment="Left" Margin="274,14,0,0" VerticalAlignment="Top"/>
+        <ListBox x:Name="listOrars" HorizontalAlignment="Left" Height="235" Margin="15,105,0,0" VerticalAlignment="Top" Width="158" SelectionChanged="ListOrars_SelectionChanged"/>
+        <Label Content="ORARET" HorizontalAlignment="Left" Margin="15,79,0,0" VerticalAlignment="Top" Width="132"/>
+        <Button x:Name="btnRuajOrar" Content="RUAJ" HorizontalAlignment="Left" Margin="488,255,0,0" VerticalAlignment="Top" Width="111" Height="39" Click="BtnRuajOrar_Click"/>
+        <TextBox x:Name="txtEmriOrarit" HorizontalAlignment="Left" Height="27" Margin="337,45,0,0" TextWrapping="Wrap" Text="Orari 1" VerticalAlignment="Top" Width="94"/>
+        <ComboBox Name="cmb1" HorizontalAlignment="Left" Height="25" Margin="243,105,0,0" VerticalAlignment="Top" Width="79"/>
+        <ComboBox Name="cmb2" HorizontalAlignment="Left" Height="25" Margin="243,135,0,0" VerticalAlignment="Top" Width="79"/>
+        <ComboBox Name="cmb3" HorizontalAlignment="Left" Height="25" Margin="243,165,0,0" VerticalAlignment="Top" Width="79"/>
+        <ComboBox Name="cmb4" HorizontalAlignment="Left" Height="25" Margin="243,195,0,0" VerticalAlignment="Top" Width="79"/>
+        <ComboBox Name="cmb5" HorizontalAlignment="Left" Height="25" Margin="243,225,0,0" VerticalAlignment="Top" Width="79"/>
+        <ComboBox Name="cmb6" HorizontalAlignment="Left" Height="25" Margin="243,255,0,0" VerticalAlignment="Top" Width="79"/>
+        <ComboBox Name="cmb7" HorizontalAlignment="Left" Height="25" Margin="243,285,0,0" VerticalAlignment="Top" Width="79"/>
+        <ComboBox Name="cmb8" HorizontalAlignment="Left" Height="25" Margin="243,315,0,0" VerticalAlignment="Top" Width="79"/>
+        <ComboBox Name="cmb9" HorizontalAlignment="Left" Height="25" Margin="383,105,0,0" VerticalAlignment="Top" Width="79"/>
+        <ComboBox Name="cmb10" HorizontalAlignment="Left" Height="25" Margin="383,135,0,0" VerticalAlignment="Top" Width="79"/>
+        <ComboBox Name="cmb11" HorizontalAlignment="Left" Height="25" Margin="383,165,0,0" VerticalAlignment="Top" Width="79"/>
+        <ComboBox Name="cmb12" HorizontalAlignment="Left" Height="25" Margin="383,195,0,0" VerticalAlignment="Top" Width="79"/>
+        <ComboBox Name="cmb13" HorizontalAlignment="Left" Height="25" Margin="383,225,0,0" VerticalAlignment="Top" Width="79"/>
+        <ComboBox Name="cmb14" HorizontalAlignment="Left" Height="25" Margin="383,255,0,0" VerticalAlignment="Top" Width="79"/>
+        <ComboBox Name="cmb15" HorizontalAlignment="Left" Height="25" Margin="383,285,0,0" VerticalAlignment="Top" Width="79"/>
+        <ComboBox Name="cmb16" HorizontalAlignment="Left" Height="25" Margin="383,315,0,0" VerticalAlignment="Top" Width="79"/>
+        <Label Content="Dita 1" HorizontalAlignment="Left" Height="25" Margin="188,105,0,0" VerticalAlignment="Top" Width="50"/>
+        <Label Content="Dita 16" HorizontalAlignment="Left" Height="25" Margin="328,315,0,0" VerticalAlignment="Top" Width="50"/>
+        <Label Content="Dita 15" HorizontalAlignment="Left" Height="25" Margin="328,285,0,0" VerticalAlignment="Top" Width="50"/>
+        <Label Content="Dita 14" HorizontalAlignment="Left" Height="25" Margin="328,255,0,0" VerticalAlignment="Top" Width="50"/>
+        <Label Content="Dita 13" HorizontalAlignment="Left" Height="25" Margin="328,225,0,0" VerticalAlignment="Top" Width="50"/>
+        <Label Content="Dita 12" HorizontalAlignment="Left" Height="25" Margin="328,195,0,0" VerticalAlignment="Top" Width="50"/>
+        <Label Content="Dita 11" HorizontalAlignment="Left" Height="25" Margin="328,165,0,0" VerticalAlignment="Top" Width="50"/>
+        <Label Content="Dita 10" HorizontalAlignment="Left" Height="25" Margin="328,135,0,0" VerticalAlignment="Top" Width="50"/>
+        <Label Content="Dita 9" HorizontalAlignment="Left" Height="25" Margin="328,105,0,0" VerticalAlignment="Top" Width="50"/>
+        <Label Content="Dita 8" HorizontalAlignment="Left" Height="25" Margin="188,315,0,0" VerticalAlignment="Top" Width="50"/>
+        <Label Content="Dita 7" HorizontalAlignment="Left" Height="25" Margin="188,285,0,0" VerticalAlignment="Top" Width="50"/>
+        <Label Content="Dita 6" HorizontalAlignment="Left" Height="25" Margin="188,255,0,0" VerticalAlignment="Top" Width="50"/>
+        <Label Content="Dita 5" HorizontalAlignment="Left" Height="25" Margin="188,225,0,0" VerticalAlignment="Top" Width="50"/>
+        <Label Content="Dita 4" HorizontalAlignment="Left" Height="25" Margin="188,195,0,0" VerticalAlignment="Top" Width="50"/>
+        <Label Content="Dita 3" HorizontalAlignment="Left" Height="25" Margin="188,165,0,0" VerticalAlignment="Top" Width="50"/>
+        <Label Content="Dita 2" HorizontalAlignment="Left" Height="25" Margin="188,135,0,0" VerticalAlignment="Top" Width="50"/>
+        <Label Content="Emri" HorizontalAlignment="Left" Height="25" Margin="274,45,0,0" VerticalAlignment="Top" Width="50"/>
+        <ComboBox Name="cmbStatusi" HorizontalAlignment="Left" Height="25" Margin="488,135,0,0" VerticalAlignment="Top" Width="111" SelectionChanged="CmbStatusi_SelectionChanged"/>
+        <Label Content="Statusi i orarit" HorizontalAlignment="Left" Height="25" Margin="488,105,0,0" VerticalAlignment="Top" Width="111"/>
+
+    </Grid>
+</Window>

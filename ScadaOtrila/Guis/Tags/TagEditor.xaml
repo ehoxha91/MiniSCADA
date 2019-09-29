@@ -1,0 +1,38 @@
+﻿<Window x:Class="ScadaOtrila.Guis.Tags.TagEditor"
+        xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+        xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+        xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
+        xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
+        xmlns:local="clr-namespace:ScadaOtrila.Guis.Tags"
+        mc:Ignorable="d"
+        Title="Tag Modification" ResizeMode="NoResize" Height="541.262" Width="502.131">
+    <Grid>
+        <Label Content="TAG" HorizontalAlignment="Left" Height="26" Margin="74,82,0,0" VerticalAlignment="Top" Width="30" RenderTransformOrigin="0.513,0.004"/>
+        <Label Content="Name" HorizontalAlignment="Left" Height="30" Margin="57,47,0,0" VerticalAlignment="Top" Width="51"/>
+        <Label Content="Opc Server" HorizontalAlignment="Left" Height="30" Margin="29,112,0,0" VerticalAlignment="Top" Width="71"/>
+        <Label Content="Machine Name" HorizontalAlignment="Left" Height="30" Margin="15,147,0,0" VerticalAlignment="Top" Width="92"/>
+        <Label Content="Description" HorizontalAlignment="Left" Height="30" Margin="29,182,0,0" VerticalAlignment="Top" Width="75" RenderTransformOrigin="0.73,0.895"/>
+        <Label Content="Type" HorizontalAlignment="Left" Height="30" Margin="69,217,0,0" VerticalAlignment="Top" Width="38"/>
+        <Label Content="Unit" HorizontalAlignment="Left" Height="30" Margin="70,252,0,0" VerticalAlignment="Top" Width="37"/>
+        <Label Content="Refresh Time" HorizontalAlignment="Left" Height="30" Margin="29,287,0,0" VerticalAlignment="Top" Width="78"/>
+        <TextBox x:Name="txtName" HorizontalAlignment="Left" Height="30" Margin="113,43,0,0" TextWrapping="Wrap"  VerticalAlignment="Top" Width="314"/>
+        <TextBox x:Name="txtTAG" HorizontalAlignment="Left" Height="30" Margin="113,78,0,0" TextWrapping="Wrap"  VerticalAlignment="Top" Width="314"/>
+        <TextBox x:Name="txtOPC" HorizontalAlignment="Left" Height="30" Margin="113,112,0,0" TextWrapping="Wrap"  VerticalAlignment="Top" Width="314"/>
+        <TextBox x:Name="txtMachineName" HorizontalAlignment="Left" Height="30" Margin="113,147,0,0" TextWrapping="Wrap"  VerticalAlignment="Top" Width="314"/>
+        <TextBox x:Name="txtDescription" HorizontalAlignment="Left" Height="30" Margin="113,182,0,0" TextWrapping="Wrap"  VerticalAlignment="Top" Width="314"/>
+        <TextBox x:Name="txtUnit" HorizontalAlignment="Left" Height="30" Margin="113,252,0,0" TextWrapping="Wrap"  VerticalAlignment="Top" Width="314"/>
+        <TextBox x:Name="txtRefreshTime" Margin="113,287,0,0" TextWrapping="Wrap" Height="32" VerticalAlignment="Top" HorizontalAlignment="Left" Width="313"/>
+        <Label Content="ID" HorizontalAlignment="Left" Height="30" Margin="69,12,0,0" VerticalAlignment="Top" Width="39"/>
+        <TextBox x:Name="txtID" IsEnabled="False" HorizontalAlignment="Left" Height="30" Margin="113,8,0,0" TextWrapping="Wrap"  VerticalAlignment="Top" Width="314"/>
+        <Button Name="btnRuaje" Click="btnRuaje_Click" Content="RUAJE" Margin="113,0,0,25" Height="39" VerticalAlignment="Bottom" HorizontalAlignment="Left" Width="151"/>
+        <Button Name="btnCancel" Click="btnCancel_Click" Content="MBYLLE" Height="39" Margin="267,0,0,25" VerticalAlignment="Bottom" HorizontalAlignment="Left" Width="159"/>
+        <ComboBox Name="cmbType" HorizontalAlignment="Left" Height="30" Margin="112,217,0,0" VerticalAlignment="Top" Width="314"/>
+        <Label Content="Archive" HorizontalAlignment="Left" Height="30" Margin="57,324,0,0" VerticalAlignment="Top" Width="50"/>
+        <ComboBox x:Name="cmbArchive" HorizontalAlignment="Left" Height="30" Margin="112,324,0,0" VerticalAlignment="Top" Width="314"/>
+        <Label Content="Alarm" HorizontalAlignment="Left" Height="30" Margin="58,359,0,0" VerticalAlignment="Top" Width="50"/>
+        <ComboBox x:Name="cmbAlarm" HorizontalAlignment="Left" Height="30" Margin="113,359,0,0" VerticalAlignment="Top" Width="314"/>
+        <Label Content="Scale" HorizontalAlignment="Left" Height="30" Margin="70,394,0,0" VerticalAlignment="Top" Width="37"/>
+        <TextBox x:Name="txtScale" HorizontalAlignment="Left" Height="30" Margin="113,394,0,0" TextWrapping="Wrap"  VerticalAlignment="Top" Width="314"/>
+
+    </Grid>
+</Window>

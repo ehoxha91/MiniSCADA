@@ -1,0 +1,50 @@
+﻿
+Microsoft Visual Studio Solution File, Format Version 12.00
+# Visual Studio Version 16
+VisualStudioVersion = 16.0.29215.179
+MinimumVisualStudioVersion = 10.0.40219.1
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "ScadaOtrila", "ScadaOtrila\ScadaOtrila.csproj", "{F57D9AA8-8C92-42AC-B12F-D64DDCFF9D4A}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "OpcOtrilaService", "OpcOtrilaService\OpcOtrilaService.csproj", "{7F4E4553-E539-46C5-9683-2CF2615BF8F4}"
+EndProject
+Project("{54435603-DBB4-11D2-8724-00A0C9A8B90C}") = "OpcServiceInstaller", "OpcServiceInstaller\OpcServiceInstaller.vdproj", "{7F174932-089F-4A67-B885-E0228442EAC7}"
+EndProject
+Global
+	GlobalSection(SolutionConfigurationPlatforms) = preSolution
+		Debug|Any CPU = Debug|Any CPU
+		Debug|x86 = Debug|x86
+		Release|Any CPU = Release|Any CPU
+		Release|x86 = Release|x86
+	EndGlobalSection
+	GlobalSection(ProjectConfigurationPlatforms) = postSolution
+		{F57D9AA8-8C92-42AC-B12F-D64DDCFF9D4A}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{F57D9AA8-8C92-42AC-B12F-D64DDCFF9D4A}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{F57D9AA8-8C92-42AC-B12F-D64DDCFF9D4A}.Debug|x86.ActiveCfg = Debug|x86
+		{F57D9AA8-8C92-42AC-B12F-D64DDCFF9D4A}.Debug|x86.Build.0 = Debug|x86
+		{F57D9AA8-8C92-42AC-B12F-D64DDCFF9D4A}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{F57D9AA8-8C92-42AC-B12F-D64DDCFF9D4A}.Release|Any CPU.Build.0 = Release|Any CPU
+		{F57D9AA8-8C92-42AC-B12F-D64DDCFF9D4A}.Release|x86.ActiveCfg = Release|x86
+		{F57D9AA8-8C92-42AC-B12F-D64DDCFF9D4A}.Release|x86.Build.0 = Release|x86
+		{7F4E4553-E539-46C5-9683-2CF2615BF8F4}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{7F4E4553-E539-46C5-9683-2CF2615BF8F4}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{7F4E4553-E539-46C5-9683-2CF2615BF8F4}.Debug|x86.ActiveCfg = Debug|x86
+		{7F4E4553-E539-46C5-9683-2CF2615BF8F4}.Debug|x86.Build.0 = Debug|x86
+		{7F4E4553-E539-46C5-9683-2CF2615BF8F4}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{7F4E4553-E539-46C5-9683-2CF2615BF8F4}.Release|Any CPU.Build.0 = Release|Any CPU
+		{7F4E4553-E539-46C5-9683-2CF2615BF8F4}.Release|x86.ActiveCfg = Release|x86
+		{7F4E4553-E539-46C5-9683-2CF2615BF8F4}.Release|x86.Build.0 = Release|x86
+		{7F174932-089F-4A67-B885-E0228442EAC7}.Debug|Any CPU.ActiveCfg = Debug
+		{7F174932-089F-4A67-B885-E0228442EAC7}.Debug|x86.ActiveCfg = Debug
+		{7F174932-089F-4A67-B885-E0228442EAC7}.Debug|x86.Build.0 = Debug
+		{7F174932-089F-4A67-B885-E0228442EAC7}.Release|Any CPU.ActiveCfg = Release
+		{7F174932-089F-4A67-B885-E0228442EAC7}.Release|Any CPU.Build.0 = Release
+		{7F174932-089F-4A67-B885-E0228442EAC7}.Release|x86.ActiveCfg = Release
+		{7F174932-089F-4A67-B885-E0228442EAC7}.Release|x86.Build.0 = Release
+	EndGlobalSection
+	GlobalSection(SolutionProperties) = preSolution
+		HideSolutionNode = FALSE
+	EndGlobalSection
+	GlobalSection(ExtensibilityGlobals) = postSolution
+		SolutionGuid = {B36E2020-7B8D-4785-93F7-3086ECD6EA4B}
+	EndGlobalSection
+EndGlobal

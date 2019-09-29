@@ -1,0 +1,16 @@
+﻿<Window x:Class="ScadaOtrila.Guis.Oraret.MenaxhimiDiteveOraret"
+        xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+        xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+        xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
+        xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
+        xmlns:local="clr-namespace:ScadaOtrila.Guis.Oraret"
+        mc:Ignorable="d"
+        Title="Menaxhimi Diteve - Oraret" Height="422.837" Width="327.364">
+    <Grid>
+        <ListBox x:Name="listDitet" HorizontalAlignment="Left" Height="322" Margin="10,10,0,0" VerticalAlignment="Top" Width="298"/>
+        <Button x:Name="btnShlyej" Content="SHLYEJ" HorizontalAlignment="Left" Height="39" Margin="10,337,0,0" VerticalAlignment="Top" Width="96" Click="BtnShlyej_Click" />
+        <Button x:Name="btnNdrysho" Content="NDRYSHO" HorizontalAlignment="Left" Height="39" Margin="111,337,0,0" VerticalAlignment="Top" Width="96" Click="BtnNdrysho_Click" />
+        <Button x:Name="btnMbylle" Content="MBYLLE" HorizontalAlignment="Left" Height="39" Margin="212,337,0,0" VerticalAlignment="Top" Width="96" Click="BtnMbylle_Click"/>
+
+    </Grid>
+</Window>
