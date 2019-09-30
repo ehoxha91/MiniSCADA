@@ -16,6 +16,7 @@ namespace ScadaOtrila.Classes
         public static EasyDAClient opcClient;
         public static EasyDAClient writterClient;
         public static event EventHandler<OpcTag> OpcManagerTagChanged;
+        private static System.Timers.Timer archiveTimer;
         private static System.Timers.Timer opcStackTimer;
         public static void StartOpcMasteR()
         {
@@ -30,6 +31,7 @@ namespace ScadaOtrila.Classes
             opcStackTimer = new System.Timers.Timer(1000);
             opcStackTimer.Elapsed += OpcStackTimer_Elapsed;
             opcStackTimer.Start();
+
         }
 
         public static void StopThread()

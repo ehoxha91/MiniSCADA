@@ -217,6 +217,9 @@
     <Compile Include="Guis\Oraret\OrariDitaConfig.xaml.cs">
       <DependentUpon>OrariDitaConfig.xaml</DependentUpon>
     </Compile>
+    <Compile Include="Guis\SystemOtrila\Operatoret.xaml.cs">
+      <DependentUpon>Operatoret.xaml</DependentUpon>
+    </Compile>
     <Compile Include="Guis\Tags\TagTrend.xaml.cs">
       <DependentUpon>TagTrend.xaml</DependentUpon>
     </Compile>
@@ -240,6 +243,10 @@
       <Generator>MSBuild:Compile</Generator>
     </Page>
     <Page Include="Guis\Oraret\OrariDitaConfig.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
+    <Page Include="Guis\SystemOtrila\Operatoret.xaml">
       <SubType>Designer</SubType>
       <Generator>MSBuild:Compile</Generator>
     </Page>
@@ -332,6 +339,52 @@
   </ItemGroup>
   <ItemGroup>
     <None Include="App.config" />
+  </ItemGroup>
+  <ItemGroup>
+    <Resource Include="Resources\air-supply-v2.png" />
+    <Resource Include="Resources\air-supply.png" />
+    <Resource Include="Resources\airpipe_angle_left_down.png" />
+    <Resource Include="Resources\airpipe_angle_left_up - Copy.png" />
+    <Resource Include="Resources\airpipe_angle_right_down - Copy.png" />
+    <Resource Include="Resources\airpipe_angle_right_up - Copy.png" />
+    <Resource Include="Resources\airpipe_horizontal.png" />
+    <Resource Include="Resources\battery_cooling_down.png" />
+    <Resource Include="Resources\battery_heating_up.png" />
+    <Resource Include="Resources\damp_mleaf_horizontal06.png" />
+    <Resource Include="Resources\damp_mleaf_horizontal10 - Copy.png" />
+    <Resource Include="Resources\damp_mleaf_vertical00 - Copy.png" />
+    <Resource Include="Resources\damp_mleaf_vertical08.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <Resource Include="Resources\button_start.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <Resource Include="Resources\button_stop.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <Resource Include="Resources\buron_grey_start.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <Resource Include="Resources\button_alarm_off.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <Resource Include="Resources\button_black_alarm.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <Resource Include="Resources\chiller.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <Resource Include="Resources\AlarmOFF.png" />
+    <Resource Include="Resources\AlarmON.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <Resource Include="Resources\humidity.png" />
+    <Resource Include="Resources\pressure.png" />
+    <Resource Include="Resources\temperature.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <Resource Include="Resources\DOWN.png" />
+    <Resource Include="Resources\UP.png" />
   </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
 </Project>

@@ -6,43 +6,30 @@
         xmlns:oxy="http://oxyplot.codeplex.com"
         mc:Ignorable="d"
         Title="SCADA Otrila 2019" Height="876" Width="1424">
-    <Grid>
+    <Grid x:Name="mainGrid">
         <Menu Height="31" FontSize="15" VerticalAlignment="Top" Background="#FFEAEAEA" BorderThickness="0" BorderBrush="Black" MouseEnter="Menu_MouseEnter" MouseDown="Menu_MouseDown" Margin="4,5,7,0">
-            <MenuItem x:Name="Print" IsEnabled="False" BorderThickness="1" BorderBrush="Black" Header="Print" MouseEnter="MenuItem_MouseEnter" MouseLeave="MenuItem_MouseLeave" Width="100">
-                <MenuItem x:Name="menuAlarms" Header="Alarms" Click="menuAlarms_Click"/>
-                <MenuItem x:Name="menuTrends" Header="Trends" Click="menuTrends_Click"/>
-                <Separator/>
+            <MenuItem x:Name="Print" BorderThickness="1" BorderBrush="Black" Header="Print" MouseEnter="MenuItem_MouseEnter" MouseLeave="MenuItem_MouseLeave" Width="100">
                 <MenuItem x:Name="menuPrint" Header="Print Desktop View" Click="menuPrint_Click"/>
+            </MenuItem>
 
-            </MenuItem>
-            <MenuItem IsEnabled="False" x:Name="Raports" BorderThickness="1" BorderBrush="Black" Header="Raports" Width="96" MouseEnter="MenuItem_MouseEnter" MouseLeave="MenuItem_MouseLeave">
-                <MenuItem x:Name="menuRaport1" Header="Raport 1"/>
-                <MenuItem x:Name="menuRaport2" Header="Raport 2"/>
-                <MenuItem x:Name="menuRaport3" Header="Raport 3"/>
-            </MenuItem>
             <MenuItem Header="Tags" BorderThickness="1" BorderBrush="Black" MouseEnter="MenuItem_MouseEnter"  MouseLeave="MenuItem_MouseLeave"  Height="31" Width="117">
                 <MenuItem x:Name="menuOpcTagManagement" Header="Tag management" Click="menuOpcTagManagement_Click" />
                 <MenuItem x:Name="menuArchivingTags" Header="Tags Archive" Click="MenuArchivingTags_Click"/>
                 <Separator/>
             </MenuItem>
-            <!-- <MenuItem Header="Window Mode" BorderThickness="1" BorderBrush="Black" MouseEnter="MenuItem_MouseEnter" MouseLeave="MenuItem_MouseLeave" Height="31" Width="137">
-                <MenuItem Name="menuGraphicalWindow" Header="Graphical"/>
-                <Separator/>
-                <MenuItem Name="menuEventWindow" Header="Events"/>
-                <Separator/>
-                <MenuItem Name="menuTableWindow" Header="Table Mode"/>
-                <Separator/>
-            </MenuItem> -->
-            <MenuItem IsEnabled="False" Header="System" BorderThickness="1" BorderBrush="Black" MouseEnter="MenuItem_MouseEnter" MouseLeave="MenuItem_MouseLeave" Height="31" Width="137">
+            <MenuItem Header="System" BorderThickness="1" BorderBrush="Black" MouseEnter="MenuItem_MouseEnter" MouseLeave="MenuItem_MouseLeave" Height="31" Width="137">
                 <MenuItem x:Name="menuOperators" Header="Operators" Click="MenuOperators_Click"/>
                 <!--Separator/>
                 <MenuItem Name="menuDesktopDesigner" Header="Graphical Designer" Click="menuDesktopDesigner_Click"/>
                 <Separator/ -->
-                <MenuItem x:Name="menuDatabase" Header="Database" Click="MenuDatabase_Click"/>
+                <MenuItem IsEnabled="False" x:Name="menuDatabase" Header="Database" Click="MenuDatabase_Click"/>
                 <!--Separator/>
                 <  MenuItem x:Name="menuService" Header="OPC Service" Click="MenuService_Click" / -->
-                <Separator />
-                <MenuItem x:Name="menuClose" Header="Close"/>
+            </MenuItem>
+            <MenuItem Visibility="Hidden" IsEnabled="False" x:Name="Raports" BorderThickness="1" BorderBrush="Black" Header="Raports" Width="96" MouseEnter="MenuItem_MouseEnter" MouseLeave="MenuItem_MouseLeave">
+                <MenuItem x:Name="menuRaport1" Header="Raport 1"/>
+                <MenuItem x:Name="menuRaport2" Header="Raport 2"/>
+                <MenuItem x:Name="menuRaport3" Header="Raport 3"/>
             </MenuItem>
         </Menu>
 
@@ -50,24 +37,24 @@
         <TabControl Margin="4,46,7,176" BorderThickness="1" Foreground="White" SelectionChanged="TabControl_SelectionChanged">
 
             <TabItem Name="Salla1" Header="Salla 1" >
-                <Grid Margin="0,0,0,0">
+                <Grid Margin="0,0,0,0" Background="LightSalmon">
                     <Grid.ColumnDefinitions>
                         <ColumnDefinition/>
                     </Grid.ColumnDefinitions>
-                    <Label Content="Salla 1" FontSize="20" Margin="29,38,0,0" Height="39" VerticalAlignment="Top" HorizontalAlignment="Left" Width="124" Foreground="Black"/>
+                    <Label Content="Salla 1" FontWeight="DemiBold" FontSize="20" Margin="29,38,0,0" Height="39" VerticalAlignment="Top" HorizontalAlignment="Left" Width="124" Foreground="Black"/>
                     <!-- Vlerat e deshiruara S1-->
                     <Button x:Name="btnSalla1OnOff"  Content="ON/OFF" Height="39" Width="105" Background="LightGray" HorizontalAlignment="Left" Margin="158,40,0,0" VerticalAlignment="Top" Click="BtnSalla1OnOff_Click"/>
 
                     <Label Content="Temperatura (*C)" FontSize="16" Margin="28,294,0,0" Height="39" VerticalAlignment="Top" HorizontalAlignment="Left" Width="134" Background="#FF359AFF"/>
                     <Label Content="Presioni (Pa)" FontSize="16" Height="39" VerticalAlignment="Top" HorizontalAlignment="Left" Width="134" Margin="28,338,0,0" Background="#FF359AFF"/>
-                    <Label Content="Vlerat aktuale" FontSize="16" Height="39" VerticalAlignment="Top" HorizontalAlignment="Left" Width="147" Margin="28,250,0,0" FontWeight="Bold"/>
+                    <Label Content="Vlerat aktuale" FontSize="16" Height="39" VerticalAlignment="Top" HorizontalAlignment="Left" Width="147" Margin="28,250,0,0" FontWeight="DemiBold"/>
                     <TextBox TextAlignment="Center" IsEnabled="False" TextWrapping="Wrap" x:Name="txtLagAs1" Height="39" Margin="167,382,0,0" VerticalAlignment="Top" HorizontalAlignment="Left" Width="81" Background="White" BorderBrush="Black" FontWeight="Bold" FontFamily="Trebuchet MS" FontSize="14" Foreground="Black"/>
                     <TextBox TextAlignment="Center" TextWrapping="Wrap" IsEnabled="False" x:Name="txtPrAs1" Height="39" Margin="167,338,0,0"  VerticalAlignment="Top" HorizontalAlignment="Left" Width="81" Background="White" BorderBrush="Black" FontWeight="Bold" FontFamily="Trebuchet MS" FontSize="14" Foreground="Black"/>
                     <TextBox TextAlignment="Center" TextWrapping="Wrap" x:Name="txtTmpAs1" IsEnabled="False" Height="39" Margin="168,294,0,0" VerticalAlignment="Top" HorizontalAlignment="Left" Width="80" Background="White" BorderBrush="Black" FontWeight="Bold" FontFamily="Trebuchet MS" FontSize="14" Foreground="Black"/>
                     <Label Content="Temperatura (*C)" FontSize="16" Margin="29,130,0,0" Height="34" VerticalAlignment="Top" HorizontalAlignment="Left" Width="134" Background="#FFDC2CE4"/>
                     <Label Content="Lageshtia (Rh)" FontSize="16" Height="34" VerticalAlignment="Top" HorizontalAlignment="Left" Width="134" Margin="29,208,0,0" Background="#FFDC2CE4"/>
                     <Label Content="Presioni (Pa)" FontSize="16" Height="34" VerticalAlignment="Top" HorizontalAlignment="Left" Width="134" Margin="29,169,0,0" Background="#FFDC2CE4"/>
-                    <Label Content="Vlerat e deshiruara" FontStyle="Normal" FontSize="16" Height="34" VerticalAlignment="Top" HorizontalAlignment="Left" Width="219" Margin="29,91,0,0" FontWeight="Bold"/>
+                    <Label Content="Vlerat e deshiruara" FontStyle="Normal" FontSize="16" Height="34" VerticalAlignment="Top" HorizontalAlignment="Left" Width="219" Margin="29,91,0,0" FontWeight="DemiBold"/>
                     <TextBox TextAlignment="Center" TextWrapping="Wrap" IsEnabled="False" x:Name="txtLagSet1" Height="34" Margin="168,208,0,0"  VerticalAlignment="Top" HorizontalAlignment="Left" Width="80" Background="White" BorderBrush="Black" FontWeight="Bold" FontFamily="Trebuchet MS" FontSize="14" Foreground="Black"/>
                     <TextBox TextAlignment="Center" TextWrapping="Wrap" IsEnabled="False" x:Name="txtPrSet1" Height="34" Margin="168,169,0,0"   VerticalAlignment="Top" HorizontalAlignment="Left" Width="80" Background="White" BorderBrush="Black" FontWeight="Bold" FontFamily="Trebuchet MS" FontSize="14" Foreground="Black"/>
                     <TextBox TextAlignment="Center" TextWrapping="Wrap" IsEnabled="False" x:Name="txtTmpSets1" Height="34" Margin="168,130,0,0" VerticalAlignment="Top" HorizontalAlignment="Left" Width="80" Background="White" BorderBrush="Black" FontWeight="Bold" FontFamily="Trebuchet MS" FontSize="14" Foreground="Black"/>
@@ -78,32 +65,33 @@
                     <Button x:Name="btnDecPresS1" Content="-" FontSize="18" FontStretch="UltraExpanded" Width="37" Margin="253,169,0,0" FontWeight="Bold" Background="#FFDBECF7" Click="BtnDecPresS1_Click" Height="34" VerticalAlignment="Top" HorizontalAlignment="Left"/>
                     <Button x:Name="btnIncTempS1" Content="+" FontSize="18" FontStretch="UltraExpanded" Width="37" Margin="295,130,0,0" FontWeight="Bold" Background="#FFF1A0A0" Click="BtnIncTempS1_Click" HorizontalAlignment="Left" Height="34" VerticalAlignment="Top"/>
                     <Button x:Name="btnDecTempS1" Content="-" FontSize="18" FontStretch="UltraExpanded" Width="37" Margin="253,130,0,0" FontWeight="Bold" Background="#FFDBECF7" Click="BtnDecTempS1_Click" HorizontalAlignment="Left" Height="34" VerticalAlignment="Top"/>
-                    <Canvas Background="LightGray" Margin="349,10,0,10">
-                        <oxy:Plot x:Name="PlotSalla1" Title="Historia" Model="{Binding PlotModel}" BorderBrush="Black" BorderThickness="2" Height="575" Width="1050"/>
+
+                    <Canvas Margin="349,10,0,10">
+                        <oxy:Plot x:Name="PlotSalla1" Title="Historia" Model="{Binding PlotModel}" BorderBrush="Black" BorderThickness="2" Height="565" Width="1040"/>
                     </Canvas>
                     <Label Content="Lageshtia (Rh)" FontSize="16" Height="39" VerticalAlignment="Top" HorizontalAlignment="Left" Width="134" Margin="28,382,0,0" Background="#FF359AFF"/>
                     <Label Name="lblAlarmS1" HorizontalAlignment="Left" Height="44" Margin="29,514,0,0" VerticalAlignment="Top" Width="303"/>
                 </Grid>
             </TabItem>
             <TabItem Name="Salla2" Header="Salla 2" >
-                <Grid Margin="0,0,0,0">
+                <Grid Margin="0,0,0,0" Background="LightSalmon">
                     <Grid.ColumnDefinitions>
                         <ColumnDefinition/>
                     </Grid.ColumnDefinitions>
-                    <Label Content="Salla 2" FontSize="20" Margin="29,38,0,0" Height="39" VerticalAlignment="Top" HorizontalAlignment="Left" Width="124" Foreground="Black"/>
+                    <Label Content="Salla 2" FontSize="20" Margin="29,38,0,0" Height="39" FontWeight="DemiBold" VerticalAlignment="Top" HorizontalAlignment="Left" Width="124" Foreground="Black"/>
                     <!-- Vlerat e deshiruara S1-->
                     <Button x:Name="btnSalla2OnOff" Content="ON/OFF" Height="39" Width="105" Background="LightGray" HorizontalAlignment="Left" Margin="158,40,0,0" VerticalAlignment="Top" Click="BtnSalla2OnOff_Click"/>
                     <Label Name="lblAlarmS2" HorizontalAlignment="Left" Height="44" Margin="29,514,0,0" VerticalAlignment="Top" Width="303"/>
                     <Label Content="Temperatura (*C)" FontSize="16" Margin="28,294,0,0" Height="39" VerticalAlignment="Top" HorizontalAlignment="Left" Width="134" Background="#FF359AFF"/>
                     <Label Content="Presioni (Pa)" FontSize="16" Height="39" VerticalAlignment="Top" HorizontalAlignment="Left" Width="134" Margin="28,338,0,0" Background="#FF359AFF"/>
-                    <Label Content="Vlerat aktuale" FontSize="16" Height="39" VerticalAlignment="Top" HorizontalAlignment="Left" Width="147" Margin="28,250,0,0" FontWeight="Bold"/>
+                    <Label Content="Vlerat aktuale" FontSize="16" Height="39" VerticalAlignment="Top" HorizontalAlignment="Left" Width="147" Margin="28,250,0,0" FontWeight="DemiBold"/>
                     <TextBox TextAlignment="Center" IsEnabled="False" TextWrapping="Wrap" x:Name="txtLagAs2" Height="39" Margin="167,382,0,0" VerticalAlignment="Top" HorizontalAlignment="Left" Width="81" BorderBrush="Black" FontWeight="Bold" FontFamily="Trebuchet MS" FontSize="14" Foreground="Black"/>
                     <TextBox TextAlignment="Center" TextWrapping="Wrap" IsEnabled="False" x:Name="txtPrAs2" Height="39" Margin="167,338,0,0"  VerticalAlignment="Top" HorizontalAlignment="Left" Width="81" BorderBrush="Black" FontWeight="Bold" FontFamily="Trebuchet MS" FontSize="14" Foreground="Black"/>
                     <TextBox TextAlignment="Center" TextWrapping="Wrap" x:Name="txtTmpAs2" IsEnabled="False" Height="39" Margin="168,294,0,0" VerticalAlignment="Top" HorizontalAlignment="Left" Width="80" BorderBrush="Black" FontWeight="Bold" FontFamily="Trebuchet MS" FontSize="14" Foreground="Black"/>
                     <Label Content="Temperatura (*C)" FontSize="16" Margin="29,130,0,0" Height="34" VerticalAlignment="Top" HorizontalAlignment="Left" Width="134" Background="#FFDC2CE4"/>
                     <Label Content="Lageshtia (Rh)" FontSize="16" Height="34" VerticalAlignment="Top" HorizontalAlignment="Left" Width="134" Margin="29,208,0,0" Background="#FFDC2CE4"/>
                     <Label Content="Presioni (Pa)" FontSize="16" Height="34" VerticalAlignment="Top" HorizontalAlignment="Left" Width="134" Margin="29,169,0,0" Background="#FFDC2CE4"/>
-                    <Label Content="Vlerat e deshiruara" FontStyle="Normal" FontSize="16" Height="34" VerticalAlignment="Top" HorizontalAlignment="Left" Width="219" Margin="29,91,0,0" FontWeight="Bold"/>
+                    <Label Content="Vlerat e deshiruara" FontStyle="Normal" FontSize="16" Height="34" VerticalAlignment="Top" HorizontalAlignment="Left" Width="219" Margin="29,91,0,0" FontWeight="DemiBold"/>
                     <TextBox TextAlignment="Center" TextWrapping="Wrap" IsEnabled="False" x:Name="txtLagSet2" Height="34" Margin="168,208,0,0"  VerticalAlignment="Top" HorizontalAlignment="Left" Width="80" BorderBrush="Black" FontWeight="Bold" FontFamily="Trebuchet MS" FontSize="14" Foreground="Black"/>
                     <TextBox TextAlignment="Center" TextWrapping="Wrap" IsEnabled="False" x:Name="txtPrSet2" Height="34" Margin="168,169,0,0"   VerticalAlignment="Top" HorizontalAlignment="Left" Width="80" BorderBrush="Black" FontWeight="Bold" FontFamily="Trebuchet MS" FontSize="14" Foreground="Black"/>
                     <TextBox TextAlignment="Center" TextWrapping="Wrap" IsEnabled="False" x:Name="txtTmpSets2" Height="34" Margin="168,130,0,0" VerticalAlignment="Top" HorizontalAlignment="Left" Width="80" BorderBrush="Black" FontWeight="Bold" FontFamily="Trebuchet MS" FontSize="14" Foreground="Black"/>
@@ -114,100 +102,163 @@
                     <Button x:Name="btnDecPresS2" Content="-" FontSize="18" FontStretch="UltraExpanded" Width="37" Margin="253,169,0,0" FontWeight="Bold" Background="#FFDBECF7" Click="BtnDecPresS2_Click" Height="34" VerticalAlignment="Top" HorizontalAlignment="Left"/>
                     <Button x:Name="btnIncTempS2" Content="+" FontSize="18" FontStretch="UltraExpanded" Width="37" Margin="295,130,0,0" FontWeight="Bold" Background="#FFF1A0A0" Click="BtnIncTempS2_Click" HorizontalAlignment="Left" Height="34" VerticalAlignment="Top"/>
                     <Button x:Name="btnDecTempS2" Content="-" FontSize="18" FontStretch="UltraExpanded" Width="37" Margin="253,130,0,0" FontWeight="Bold" Background="#FFDBECF7" Click="BtnDecTempS2_Click" HorizontalAlignment="Left" Height="34" VerticalAlignment="Top"/>
-                    <Canvas Background="LightGray" Margin="349,10,10,10">
-                        <oxy:Plot x:Name="PlotSalla2" Title="Historia" Model="{Binding PlotModel}" BorderBrush="Black" BorderThickness="2" Height="575" Width="1040"/>
+                    <Canvas Margin="349,10,10,10">
+                        <oxy:Plot x:Name="PlotSalla2" Title="Historia" Model="{Binding PlotModel}" BorderBrush="Black" BorderThickness="2" Height="565" Width="1040"/>
                     </Canvas>
                     <Label Content="Lageshtia (Rh)" FontSize="16" Height="39" VerticalAlignment="Top" HorizontalAlignment="Left" Width="134" Margin="28,382,0,0" Background="#FF359AFF"/>
                 </Grid>
             </TabItem>
             <TabItem Name="Salla3" Header="Salla 3" >
-                <Grid Margin="0,0,0,0">
+                <Grid Margin="0,0,0,0" Background="LightSalmon">
                     <!-- Vlerat e deshiruara S1-->
-                    <Label Content="Salla 3" FontSize="20" Margin="29,38,0,0" Height="39" VerticalAlignment="Top" HorizontalAlignment="Left" Width="124" Foreground="Black"/>
+                    <Label Content="Salla 3" FontWeight="DemiBold" FontSize="20" Margin="29,38,0,0" Height="39" VerticalAlignment="Top" HorizontalAlignment="Left" Width="124" Foreground="Black"/>
                     <Button x:Name="btnSalla3OnOff" Content="ON/OFF" Height="39" Width="105" Background="LightGray" HorizontalAlignment="Left" Margin="158,40,0,0" VerticalAlignment="Top" Click="BtnSalla3OnOff_Click"/>
                     <Label Name="lblAlarmS3" HorizontalAlignment="Left" Height="44" Margin="29,514,0,0" VerticalAlignment="Top" Width="303"/>
                     <Label Content="Temperatura (*C)" FontSize="16" Margin="28,294,0,0" Height="39" VerticalAlignment="Top" HorizontalAlignment="Left" Width="134" Foreground="Black" Background="#FF359AFF"/>
                     <Label Content="Lageshtia (Rh)" FontSize="16" Height="39" VerticalAlignment="Top" HorizontalAlignment="Left" Width="134" Margin="28,382,0,0" Foreground="Black" Background="#FF359AFF"/>
                     <Label Content="Presioni (Pa)" FontSize="16" Height="39" VerticalAlignment="Top" HorizontalAlignment="Left" Width="134" Margin="28,338,0,0" Foreground="Black" Background="#FF359AFF"/>
-                    <Label Content="Vlerat aktuale" FontSize="16" Height="39" VerticalAlignment="Top" HorizontalAlignment="Left" Width="147" Margin="28,250,0,0" FontWeight="Bold"/>
+                    <Label Content="Vlerat aktuale" FontSize="16" Height="39" VerticalAlignment="Top" HorizontalAlignment="Left" Width="147" Margin="28,250,0,0" FontWeight="DemiBold"/>
                     <TextBox TextAlignment="Center"  TextWrapping="Wrap"  IsEnabled="False" x:Name="txtLagAs3" Height="39" Margin="167,382,0,0" RenderTransformOrigin="0.471,0.588" VerticalAlignment="Top" HorizontalAlignment="Left" Width="81" FontWeight="Bold" FontFamily="Trebuchet MS" FontSize="14" Foreground="Black" BorderBrush="Black"/>
                     <TextBox TextAlignment="Center"  TextWrapping="Wrap" IsEnabled="False" x:Name="txtPrAs3" Height="39" Margin="167,338,0,0" RenderTransformOrigin="0.471,0.588" VerticalAlignment="Top" HorizontalAlignment="Left" Width="81" FontWeight="Bold" FontFamily="Trebuchet MS" FontSize="14" Foreground="Black" BorderBrush="Black"/>
                     <TextBox TextAlignment="Center"  TextWrapping="Wrap" IsEnabled="False" x:Name="txtTmpAs3" Height="39" Margin="167,294,0,0" VerticalAlignment="Top" HorizontalAlignment="Left" Width="81" FontWeight="Bold" FontFamily="Trebuchet MS" FontSize="14" Foreground="Black" BorderBrush="Black"/>
                     <Label Content="Temperatura (*C)" FontSize="16" Margin="29,130,0,0" Height="34" VerticalAlignment="Top" HorizontalAlignment="Left" Width="134" Foreground="Black" Background="#FFDC2CE4"/>
                     <Label Content="Lageshtia (Rh)" FontSize="16" Height="34" VerticalAlignment="Top" HorizontalAlignment="Left" Width="134" Margin="29,208,0,0" Foreground="Black" Background="#FFDC2CE4"/>
                     <Label Content="Presioni (Pa)" FontSize="16" Height="34" VerticalAlignment="Top" HorizontalAlignment="Left" Width="134" Margin="29,169,0,0" Foreground="Black" Background="#FFDC2CE4"/>
-                    <Label Content="Vlerat e deshiruara" FontStyle="Normal" FontSize="16" Height="34" VerticalAlignment="Top" HorizontalAlignment="Left" Width="219" Margin="29,91,0,0" FontWeight="Bold" Foreground="Black"/>
+                    <Label Content="Vlerat e deshiruara" FontStyle="Normal" FontSize="16" Height="34" VerticalAlignment="Top" HorizontalAlignment="Left" Width="219" Margin="29,91,0,0" FontWeight="DemiBold" Foreground="Black"/>
                     <TextBox TextAlignment="Center"  TextWrapping="Wrap" IsEnabled="False" x:Name="txtLagSet3" Height="34" Margin="168,208,0,0" RenderTransformOrigin="0.471,0.588" VerticalAlignment="Top" HorizontalAlignment="Left" Width="80" FontWeight="Bold" FontFamily="Trebuchet MS" FontSize="14" Foreground="Black" BorderBrush="Black"/>
                     <TextBox TextAlignment="Center"  TextWrapping="Wrap" IsEnabled="False" x:Name="txtPrSet3" Height="34" Margin="168,169,0,0" RenderTransformOrigin="0.471,0.588" VerticalAlignment="Top" HorizontalAlignment="Left" Width="80" FontWeight="Bold" FontFamily="Trebuchet MS" FontSize="14" Foreground="Black" BorderBrush="Black"/>
                     <TextBox TextAlignment="Center"  TextWrapping="Wrap" IsEnabled="False" x:Name="txtTmpSet3" Height="34" Margin="168,130,0,0" VerticalAlignment="Top" HorizontalAlignment="Left" Width="80" BorderBrush="Black" FontWeight="Bold" FontFamily="Trebuchet MS" FontSize="14" Foreground="Black"/>
 
-                    <Button x:Name="btnIncLagS3" Content="+" FontSize="18" FontStretch="UltraExpanded" Width="37" Margin="295,208,0,0" FontWeight="Bold" Background="#FFF1A0A0" Click="BtnIncLagS3_Click" HorizontalAlignment="Left" Height="34" VerticalAlignment="Top"/>
-                    <Button x:Name="btnDecLagS3" Content="-" FontSize="18" FontStretch="UltraExpanded" Width="37" Margin="253,208,0,0" FontWeight="Bold" Background="#FFDBECF7" Click="BtnDecLagS3_Click" Height="34" VerticalAlignment="Top" HorizontalAlignment="Left"/>
-                    <Button x:Name="btnIncPresS3" Content="+" FontSize="18" FontStretch="UltraExpanded" Width="37" Margin="295,169,0,0" FontWeight="Bold" Background="#FFF1A0A0" Click="BtnIncPresS3_Click" Height="34" VerticalAlignment="Top" HorizontalAlignment="Left"/>
-                    <Button x:Name="btnDecPresS3" Content="-" FontSize="18" FontStretch="UltraExpanded" Width="37" Margin="253,169,0,0" FontWeight="Bold" Background="#FFDBECF7" Click="BtnDecPresS3_Click" Height="34" VerticalAlignment="Top" HorizontalAlignment="Left"/>
-                    <Button x:Name="btnIncTempS3" Content="+" FontSize="18" FontStretch="UltraExpanded" Width="37" Margin="295,130,0,0" FontWeight="Bold" Background="#FFF1A0A0" Click="BtnIncTempS3_Click" HorizontalAlignment="Left" Height="34" VerticalAlignment="Top"/>
-                    <Button x:Name="btnDecTempS3" Content="-" FontSize="18" FontStretch="UltraExpanded" Width="37" Margin="253,130,0,0" FontWeight="Bold" Background="#FFDBECF7" Click="BtnDecTempS3_Click" Height="34" VerticalAlignment="Top" HorizontalAlignment="Left"/>
-                    <Canvas Background="LightGray" Margin="349,10,10,10">
-                        <oxy:Plot x:Name="PlotSalla3" Title="Historia" Model="{Binding PlotModel}" BorderBrush="Black" BorderThickness="2" Height="575" Width="1040"/>
+                    <Button x:Name="btnIncLagS3"  FontSize="18" FontStretch="UltraExpanded" Width="37" Margin="295,208,0,0" FontWeight="Bold" Click="BtnIncLagS3_Click" HorizontalAlignment="Left" Height="34" VerticalAlignment="Top" Background="#FFF1A0A0" Content="+"/>
+                    <Button x:Name="btnDecLagS3"  FontSize="18" FontStretch="UltraExpanded" Width="37" Margin="253,208,0,0" Click="BtnDecLagS3_Click" Height="34" VerticalAlignment="Top" HorizontalAlignment="Left" Background="#FFDBECF7" Content="-" FontWeight="Bold"/>
+                    <Button x:Name="btnIncPresS3"  FontSize="18" FontStretch="UltraExpanded" Width="37" Margin="295,169,0,0" FontWeight="Bold" Click="BtnIncPresS3_Click" Height="34" VerticalAlignment="Top" HorizontalAlignment="Left" Background="#FFF1A0A0" Content="+"/>
+                    <Button x:Name="btnDecPresS3" FontSize="18" FontStretch="UltraExpanded" Width="37" Margin="253,169,0,0" Click="BtnDecPresS3_Click" Height="34" VerticalAlignment="Top" HorizontalAlignment="Left" Background="#FFDBECF7" Content="-" FontWeight="Bold"/>
+                    <Button x:Name="btnIncTempS3"  FontSize="18" FontStretch="UltraExpanded" Width="37" Margin="295,130,0,0" FontWeight="Bold" Click="BtnIncTempS3_Click" HorizontalAlignment="Left" Height="34" VerticalAlignment="Top" Background="#FFF1A0A0" Content="+"/>
+                    <Button x:Name="btnDecTempS3" FontSize="18" FontStretch="UltraExpanded" Width="37" Margin="253,130,0,0" Click="BtnDecTempS3_Click" Height="34" VerticalAlignment="Top" HorizontalAlignment="Left" Background="#FFDBECF7" Content="-" FontWeight="Bold"/>
+                    <Canvas Margin="349,10,10,10">
+                        <oxy:Plot x:Name="PlotSalla3" Title="Historia" Model="{Binding PlotModel}" BorderBrush="Black" BorderThickness="2" Height="565" Width="1040"/>
                     </Canvas>
                 </Grid>
             </TabItem>
-            <TabItem Name="HVAC" Header="Parametra te pergjithshem">
+            <TabItem Name="HVAC" Header="Klima Komora dhe VRF">
                 <Grid>
-                    <Button x:Name="btnSeason" Content="NGROHJE/FTOHJE" Background="LightGray" FontSize="20" Margin="19,12,0,0" Click="BtnSeason_Click" HorizontalAlignment="Left" Width="181" Height="47" VerticalAlignment="Top" FontFamily="Trebuchet MS" />
-                    <Button x:Name="btnNxemsatOnOff" Content="Nxemsat ON/OFF" Margin="19,417,0,0" Click="BtnNxemsatOnOff_Click" FontFamily="Trebuchet MS" FontWeight="Bold" FontSize="14" Foreground="Black" Background="LightGray" HorizontalAlignment="Left" Width="181" Height="44" VerticalAlignment="Top" />
-                    <Button x:Name="btnResetoAlarmet" Content="Reseto Alarmet" Margin="206,417,0,0" FontFamily="Trebuchet MS" Click="BtnResetoAlarmet_Click" Foreground="Black" FontWeight="Bold" FontSize="15" Background="LightGray" HorizontalAlignment="Left" Width="169" Height="44" VerticalAlignment="Top" />
+                    <Border BorderBrush="Black" BorderThickness="1" HorizontalAlignment="Left" Margin="629,10,0,10" Width="224" Background="#FFF9D865">
+                        <Label Content="Orari" FontWeight="DemiBold" FontSize="20" Margin="9,9,0,0" Height="39" VerticalAlignment="Top" HorizontalAlignment="Left" Width="207" Foreground="Black"/>
+                    </Border>
+                    <Border BorderBrush="Black" BorderThickness="1" HorizontalAlignment="Left" Margin="10,10,0,10" Width="614" Background="#FFDCA9C2">
+                        <Label Content="Klima-Komora [AHU]" FontWeight="DemiBold" FontSize="20" Margin="24,9,0,0" Height="39" VerticalAlignment="Top" HorizontalAlignment="Left" Width="429" Foreground="Black"/>
+                    </Border>
+                    <Border BorderBrush="Black" BorderThickness="1" Margin="858,10,10,10" Background="#FFE6C9D7"/>
+                    <Button x:Name="btnSeason" Content="NGROHJE/FTOHJE" Background="LightGray" FontSize="20" Margin="34,68,0,0" Click="BtnSeason_Click" HorizontalAlignment="Left" Width="181" Height="47" VerticalAlignment="Top" FontFamily="Trebuchet MS" />
+                    <Button x:Name="btnNxemsatOnOff" Content="Nxemsat ON/OFF" Margin="221,525,0,0" Click="BtnNxemsatOnOff_Click" FontFamily="Trebuchet MS" FontWeight="Bold" FontSize="14" Foreground="Black" Background="LightGray" HorizontalAlignment="Left" Width="181" Height="44" VerticalAlignment="Top" />
+                    <Button x:Name="btnResetoAlarmet" Content="Reseto Alarmet" Margin="34,525,0,0" FontFamily="Trebuchet MS" Click="BtnResetoAlarmet_Click" Foreground="Black" FontWeight="Bold" FontSize="15" Background="LightGray" HorizontalAlignment="Left" Width="181" Height="44" VerticalAlignment="Top" />
                     <!-- Temperaturat -->
-                    <Label Content="Temperatura aktuale: " BorderThickness="1" FontSize="14" Margin="19,82,0,0" HorizontalAlignment="Left" Width="181" Height="35" VerticalAlignment="Top" FontFamily="Trebuchet MS" Foreground="White" BorderBrush="White" Background="#FF0078D7" />
-                    <TextBox x:Name="txtOutsideTemp" IsEnabled="False" TextAlignment="Center" TextWrapping="Wrap" Text="Temperatura e jashtme 0.0*C" FontSize="14" Margin="206,12,0,0" Height="47" VerticalAlignment="Top" FontFamily="Trebuchet MS" HorizontalAlignment="Left" Width="228" Foreground="Red" FontWeight="Bold" SelectionBrush="#FF0078D7" BorderBrush="#00ABADB3"/>
-                    <TextBox x:Name="txtTempCurrentAHU" TextAlignment="Center" IsEnabled="False" TextWrapping="Wrap" Text="0.0" FontSize="14" Margin="206,82,0,0" Height="35" VerticalAlignment="Top" FontFamily="Trebuchet MS" HorizontalAlignment="Left" Width="132" FontWeight="Bold"/>
-                    <Label Content="Temperatura e deshiruar: " BorderThickness="1" FontSize="14" Margin="19,245,0,0" HorizontalAlignment="Left" Width="181" Height="34" VerticalAlignment="Top" Foreground="White" FontFamily="Trebuchet MS" BorderBrush="White" Background="#FFD7007F" />
-                    <TextBox x:Name="txtTempSetpointAHU" TextAlignment="Center" IsEnabled="False" TextWrapping="Wrap" Text="0.0" FontSize="14" Margin="206,245,0,0" HorizontalAlignment="Left" Width="132" Height="35" VerticalAlignment="Top" FontFamily="Trebuchet MS" FontWeight="Bold"/>
-                    <Button x:Name="btnIncTempSetAHU" Content="+" FontSize="18" FontStretch="UltraExpanded" Width="44" Margin="390,244,0,0" FontWeight="Bold" Background="#FFF1A0A0"  HorizontalAlignment="Left" Height="34" VerticalAlignment="Top" Click="BtnIncTempSetAHU_Click"/>
-                    <Button x:Name="btnDecTempSetAHU" Content="-" FontSize="18" FontStretch="UltraExpanded" Width="44" Margin="341,244,0,0" FontWeight="Bold" Background="#FFDBECF7"  Height="35" VerticalAlignment="Top" HorizontalAlignment="Left" Click="BtnDecTempSetAHU_Click"/>
+                    <Label Content="Temperatura aktuale: " BorderThickness="1" FontSize="14" Margin="34,138,0,0" HorizontalAlignment="Left" Width="181" Height="35" VerticalAlignment="Top" FontFamily="Trebuchet MS" Foreground="White" BorderBrush="White" Background="#FF0078D7" />
+                    <TextBox x:Name="txtOutsideTemp" IsEnabled="False" TextAlignment="Center" TextWrapping="Wrap" Text="Temperatura e jashtme 0.0*C" FontSize="14" Margin="221,68,0,0" Height="47" VerticalAlignment="Top" FontFamily="Trebuchet MS" HorizontalAlignment="Left" Width="228" Foreground="Red" FontWeight="Bold" SelectionBrush="#FF0078D7" BorderBrush="#00ABADB3" Background="White"/>
+                    <TextBox x:Name="txtTempCurrentAHU" TextAlignment="Center" IsEnabled="False" TextWrapping="Wrap" Text="0.0" FontSize="14" Margin="221,138,0,0" Height="35" VerticalAlignment="Top" FontFamily="Trebuchet MS" HorizontalAlignment="Left" Width="132" FontWeight="Bold"/>
+                    <Label Content="Temperatura e deshiruar: " BorderThickness="1" FontSize="14" Margin="34,301,0,0" HorizontalAlignment="Left" Width="181" Height="34" VerticalAlignment="Top" Foreground="White" FontFamily="Trebuchet MS" BorderBrush="White" Background="#FFD7007F" />
+                    <TextBox x:Name="txtTempSetpointAHU" TextAlignment="Center" IsEnabled="False" TextWrapping="Wrap" Text="0.0" FontSize="14" Margin="221,301,0,0" HorizontalAlignment="Left" Width="132" Height="35" VerticalAlignment="Top" FontFamily="Trebuchet MS" FontWeight="Bold"/>
+                    <Button x:Name="btnIncTempSetAHU" FontSize="18" FontStretch="UltraExpanded" Width="44" Margin="405,300,0,0" FontWeight="Bold"  HorizontalAlignment="Left" Height="34" VerticalAlignment="Top" Click="BtnIncTempSetAHU_Click">
+                        <Button.Background>
+                            <ImageBrush ImageSource="/ScadaOtrila;component/Resources/UP.png"/>
+                        </Button.Background>
+                    </Button>
+                    <Button x:Name="btnDecTempSetAHU" FontSize="18" FontStretch="UltraExpanded" Width="44" Margin="356,300,0,0" FontWeight="Bold"  Height="35" VerticalAlignment="Top" HorizontalAlignment="Left" Click="BtnDecTempSetAHU_Click">
+                        <Button.Background>
+                            <ImageBrush ImageSource="/ScadaOtrila;component/Resources/DOWN.png"/>
+                        </Button.Background>
+                    </Button>
                     <!-- Air Input -->
-                    <Label Content="Sasia e ajrit ne furnizim: " FontSize="14" Margin="19,122,0,0" HorizontalAlignment="Left" Width="181" Height="35" VerticalAlignment="Top" FontFamily="Trebuchet MS" BorderThickness="1" Foreground="White" BorderBrush="White" Background="#FF0078D7" />
-                    <TextBox x:Name="txtAirInput" TextAlignment="Center" IsEnabled="False" TextWrapping="Wrap" Text="0.0" FontSize="14" Margin="205,122,0,0" HorizontalAlignment="Left" Width="133" Height="35" VerticalAlignment="Top" FontFamily="Trebuchet MS" FontWeight="Bold"/>
-                    <Label Content="Sasia e deshiruar e ajrit: " BorderThickness="1" FontSize="14" Margin="19,286,0,0" HorizontalAlignment="Left" Width="181" Height="35" VerticalAlignment="Top" Foreground="White" FontFamily="Trebuchet MS" BorderBrush="White" Background="#FFD7007F" />
-                    <TextBox x:Name="txtAirInputSp" TextAlignment="Center" IsEnabled="False" TextWrapping="Wrap" Text="0.0" FontSize="14" Margin="206,286,0,0"  HorizontalAlignment="Left" Width="132" Height="35" VerticalAlignment="Top" FontFamily="Trebuchet MS" FontWeight="Bold"/>
-                    <Button Visibility="Hidden" x:Name="btnIncAirInSp" IsEnabled="False" Content="+" FontSize="18" FontStretch="UltraExpanded" Width="44" Margin="380,285,0,0" FontWeight="Bold" Background="#FFF1A0A0"  HorizontalAlignment="Left" Height="34" VerticalAlignment="Top" Click="BtnIncAirInSp_Click"/>
-                    <Button Visibility="Hidden" x:Name="btnDecAirInSp" IsEnabled="False" Content="-" FontSize="18" FontStretch="UltraExpanded" Width="44" Margin="331,285,0,0" FontWeight="Bold" Background="#FFDBECF7"  Height="34" VerticalAlignment="Top" HorizontalAlignment="Left" Click="BtnDecAirInSp_Click"/>
-                    <Label Content="Sasia e ajrit ne thithje: " FontSize="14" HorizontalAlignment="Left" Width="181" Height="35" VerticalAlignment="Top" Margin="19,161,0,0" FontFamily="Trebuchet MS" BorderThickness="1" Foreground="White" BorderBrush="White" Background="#FF0078D7" />
-                    <TextBox x:Name="txtAirOut" TextAlignment="Center" IsEnabled="False" TextWrapping="Wrap" Text="0.0" FontSize="14" HorizontalAlignment="Left" Width="133" Height="35" VerticalAlignment="Top" Margin="205,161,0,0" FontFamily="Trebuchet MS" FontWeight="Bold"/>
-                    <Label Content="Lageshtia aktuale: " FontSize="14" Margin="19,201,0,0" HorizontalAlignment="Left" Width="181" Height="35" VerticalAlignment="Top" FontFamily="Trebuchet MS" BorderThickness="1" Foreground="White" BorderBrush="White" Background="#FF0078D7" />
-                    <TextBox x:Name="txtLageshtiaAktuale" TextAlignment="Center" IsEnabled="False" TextWrapping="Wrap" Text="0.0" FontSize="14" Margin="205,201,0,0" HorizontalAlignment="Left" Width="133" Height="35" VerticalAlignment="Top" FontFamily="Trebuchet MS" FontWeight="Bold"/>
-                    <Label Content="Lageshtia e deshiruar: " BorderThickness="1" FontSize="14" Margin="19,326,0,0" HorizontalAlignment="Left" Width="181" Height="35" VerticalAlignment="Top" Foreground="White" FontFamily="Trebuchet MS" BorderBrush="White" Background="#FFD7007F" />
-                    <TextBox x:Name="txtLageshtiaSp" TextAlignment="Center" IsEnabled="False" TextWrapping="Wrap" Text="0.0" FontSize="14" Margin="205,326,0,0"  HorizontalAlignment="Left" Width="133" Height="35" VerticalAlignment="Top" FontFamily="Trebuchet MS" FontWeight="Bold"/>
-                    <Button Visibility="Hidden" x:Name="btnIncLageshtia" IsEnabled="False" Content="+" FontSize="18" FontStretch="UltraExpanded" Width="44" Margin="380,326,0,0" FontWeight="Bold" Background="#FFF1A0A0"  HorizontalAlignment="Left" Height="34" VerticalAlignment="Top" Click="BtnIncLageshtia_Click" />
-                    <Button Visibility="Hidden" x:Name="btnDecLageshtia" IsEnabled="False" Content="-" FontSize="18" FontStretch="UltraExpanded" Width="44" Margin="331,326,0,0" FontWeight="Bold" Background="#FFDBECF7"  Height="34" VerticalAlignment="Top" HorizontalAlignment="Left" Click="BtnDecLageshtia_Click"/>
+                    <Label Content="Sasia e ajrit ne furnizim: " FontSize="14" Margin="34,178,0,0" HorizontalAlignment="Left" Width="181" Height="35" VerticalAlignment="Top" FontFamily="Trebuchet MS" BorderThickness="1" Foreground="White" BorderBrush="White" Background="#FF0078D7" />
+                    <TextBox x:Name="txtAirInput" TextAlignment="Center" IsEnabled="False" TextWrapping="Wrap" Text="0.0" FontSize="14" Margin="220,178,0,0" HorizontalAlignment="Left" Width="133" Height="35" VerticalAlignment="Top" FontFamily="Trebuchet MS" FontWeight="Bold"/>
+                    <Label Content="Sasia e deshiruar e ajrit: " BorderThickness="1" FontSize="14" Margin="34,342,0,0" HorizontalAlignment="Left" Width="181" Height="35" VerticalAlignment="Top" Foreground="White" FontFamily="Trebuchet MS" BorderBrush="White" Background="#FFD7007F" />
+                    <TextBox x:Name="txtAirInputSp" TextAlignment="Center" IsEnabled="False" TextWrapping="Wrap" Text="0.0" FontSize="14" Margin="221,342,0,0"  HorizontalAlignment="Left" Width="132" Height="35" VerticalAlignment="Top" FontFamily="Trebuchet MS" FontWeight="Bold"/>
+                    <Button x:Name="btnIncAirInSp" FontSize="18" FontStretch="UltraExpanded" Width="44" Margin="405,343,0,0" FontWeight="Bold"  HorizontalAlignment="Left" Height="34" VerticalAlignment="Top" Click="BtnIncAirInSp_Click">
+                        <Button.Background>
+                            <ImageBrush ImageSource="/ScadaOtrila;component/Resources/UP.png"/>
+                        </Button.Background>
+                    </Button>
+                    <Button x:Name="btnDecAirInSp" FontSize="18" FontStretch="UltraExpanded" Width="44" Margin="356,343,0,0" FontWeight="Bold"  Height="34" VerticalAlignment="Top" HorizontalAlignment="Left" Click="BtnDecAirInSp_Click">
+                        <Button.Background>
+                            <ImageBrush ImageSource="/ScadaOtrila;component/Resources/DOWN.png"/>
+                        </Button.Background>
+                    </Button>
+                    <Label Content="Sasia e ajrit ne thithje: " FontSize="14" HorizontalAlignment="Left" Width="181" Height="35" VerticalAlignment="Top" Margin="34,217,0,0" FontFamily="Trebuchet MS" BorderThickness="1" Foreground="White" BorderBrush="White" Background="#FF0078D7" />
+                    <TextBox x:Name="txtAirOut" TextAlignment="Center" IsEnabled="False" TextWrapping="Wrap" Text="0.0" FontSize="14" HorizontalAlignment="Left" Width="133" Height="35" VerticalAlignment="Top" Margin="220,217,0,0" FontFamily="Trebuchet MS" FontWeight="Bold"/>
+                    <Label Content="Lageshtia aktuale: " FontSize="14" Margin="34,257,0,0" HorizontalAlignment="Left" Width="181" Height="35" VerticalAlignment="Top" FontFamily="Trebuchet MS" BorderThickness="1" Foreground="White" BorderBrush="White" Background="#FF0078D7" />
+                    <TextBox x:Name="txtLageshtiaAktuale" TextAlignment="Center" IsEnabled="False" TextWrapping="Wrap" Text="0.0" FontSize="14" Margin="220,257,0,0" HorizontalAlignment="Left" Width="133" Height="35" VerticalAlignment="Top" FontFamily="Trebuchet MS" FontWeight="Bold"/>
+                    <Label Content="Lageshtia e deshiruar: " BorderThickness="1" FontSize="14" Margin="34,382,0,0" HorizontalAlignment="Left" Width="181" Height="35" VerticalAlignment="Top" Foreground="White" FontFamily="Trebuchet MS" BorderBrush="White" Background="#FFD7007F" />
+                    <TextBox x:Name="txtLageshtiaSp" TextAlignment="Center" IsEnabled="False" TextWrapping="Wrap" Text="0.0" FontSize="14" Margin="220,382,0,0"  HorizontalAlignment="Left" Width="133" Height="35" VerticalAlignment="Top" FontFamily="Trebuchet MS" FontWeight="Bold"/>
+                    <Button Visibility="Hidden" IsEnabled="False" x:Name="btnIncLageshtia" FontSize="18" FontStretch="UltraExpanded" Width="44" Margin="390,327,0,0" FontWeight="Bold"  HorizontalAlignment="Left" Height="34" VerticalAlignment="Top" Click="BtnIncLageshtia_Click" >
+                        <Button.Background>
+                            <ImageBrush ImageSource="/ScadaOtrila;component/Resources/UP.png"/>
+                        </Button.Background>
+                    </Button>
+                    <Button Visibility="Hidden" IsEnabled="False" x:Name="btnDecLageshtia"  FontSize="18" FontStretch="UltraExpanded" Width="44" Margin="341,327,0,0" FontWeight="Bold"  Height="34" VerticalAlignment="Top" HorizontalAlignment="Left" Click="BtnDecLageshtia_Click">
+                        <Button.Background>
+                            <ImageBrush ImageSource="/ScadaOtrila;component/Resources/DOWN.png"/>
+                        </Button.Background>
+                    </Button>
 
                     <!-- Riciklimi -->
-                    <Label Content="Riciklimi: " BorderThickness="1" FontSize="14" HorizontalAlignment="Left" Width="181" Height="35" VerticalAlignment="Top" Margin="19,365,0,0" Foreground="White" FontFamily="Trebuchet MS" BorderBrush="White" Background="#FFD7007F" />
-                    <TextBox x:Name="txtRiciklimi" TextAlignment="Center" IsEnabled="False" TextWrapping="Wrap" Text="0.0" FontSize="14"  HorizontalAlignment="Left" Width="132" Height="35" VerticalAlignment="Top" Margin="206,365,0,0" FontFamily="Trebuchet MS" FontWeight="Bold"/>
-                    <Button x:Name="btnIncRecycle" Content="+" FontSize="18" FontStretch="UltraExpanded" Width="44" FontWeight="Bold" Background="#FFF1A0A0"  HorizontalAlignment="Left" Height="34" VerticalAlignment="Top" Margin="390,365,0,0" Click="BtnIncRecycle_Click" />
-                    <Button x:Name="btnDecRecycle" Content="-" FontSize="18" FontStretch="UltraExpanded" Width="44" FontWeight="Bold" Background="#FFDBECF7"  Height="34" VerticalAlignment="Top" HorizontalAlignment="Left" Margin="341,365,0,0" Click="BtnDecRecycle_Click"/>
-                    <Canvas Background="LightGray" Margin="475,10,10,10"/>
+                    <Label Content="Riciklimi: " BorderThickness="1" FontSize="14" HorizontalAlignment="Left" Width="181" Height="35" VerticalAlignment="Top" Margin="34,421,0,0" Foreground="White" FontFamily="Trebuchet MS" BorderBrush="White" Background="#FFD7007F" />
+                    <TextBox x:Name="txtRiciklimi" TextAlignment="Center" IsEnabled="False" TextWrapping="Wrap" Text="0.0" FontSize="14"  HorizontalAlignment="Left" Width="132" Height="35" VerticalAlignment="Top" Margin="221,421,0,0" FontFamily="Trebuchet MS" FontWeight="Bold"/>
+                    <Button x:Name="btnIncRecycle"  FontSize="18" FontStretch="UltraExpanded" Width="44" FontWeight="Bold"  HorizontalAlignment="Left" Height="34" VerticalAlignment="Top" Margin="405,421,0,0" Click="BtnIncRecycle_Click" >
+                        <Button.Background>
+                            <ImageBrush ImageSource="/ScadaOtrila;component/Resources/UP.png"/>
+                        </Button.Background>
+                    </Button>
+                    <Button x:Name="btnDecRecycle"  FontSize="18" FontStretch="UltraExpanded" Width="44" FontWeight="Bold"  Height="34" VerticalAlignment="Top" HorizontalAlignment="Left" Margin="356,421,0,0" Click="BtnDecRecycle_Click">
+                        <Button.Background>
+                            <ImageBrush ImageSource="/ScadaOtrila;component/Resources/DOWN.png"/>
+                        </Button.Background>
+                    </Button>
+                    <Button x:Name="btnNgrohjeVRF" BorderThickness="1" Content="NGROHJE" Margin="994,66,0,0" FontWeight="SemiBold" FontSize="16" Click="BtnNgrohje_Click" HorizontalAlignment="Left" Width="116" Height="49" VerticalAlignment="Top"/>
+                    <Button x:Name="btnAutoVRF" BorderThickness="1" Content="AUTO" Margin="1114,66,0,0" FontWeight="SemiBold" FontSize="16" Click="BtnAuto_Click" Height="49" VerticalAlignment="Top" HorizontalAlignment="Left" Width="116" />
+                    <Button x:Name="btnOffVRF" BorderThickness="1" Content="OFF" Margin="1238,66,0,0" FontWeight="SemiBold" FontSize="16" Click="BtnOff_Click" HorizontalAlignment="Left" Width="116" Height="49" VerticalAlignment="Top"/>
+                    <Button x:Name="btnFtohjeVRF" BorderThickness="1" Content="FTOHJE" Margin="872,66,0,0" FontWeight="SemiBold" FontSize="16" Click="BtnFtohje_Click" HorizontalAlignment="Left" Width="116" Height="49" VerticalAlignment="Top"/>
+                    <TextBox x:Name="txtVRFCoolSetpoint" BorderThickness="2" TextAlignment="Center" TextWrapping="Wrap" Text="17" Margin="1114,174,0,0" FontSize="18" FontFamily="Trebuchet MS" FontWeight="Bold" BorderBrush="#FF8B3F3F" Height="41" VerticalAlignment="Top" HorizontalAlignment="Left" Width="116"/>
+                    <Label Content="Temp. e deshiruar ne NGROHJE:"  BorderThickness="2" Margin="872,128,0,0" FontSize="14" FontWeight="SemiBold" FontFamily="Trebuchet MS" BorderBrush="#FF8B3F3F" HorizontalAlignment="Left" Width="238" Height="41" VerticalAlignment="Top"/>
+                    <TextBox x:Name="txtVRFHeatSetpoint" BorderThickness="2" TextAlignment="Center" TextWrapping="Wrap" Text="25" Margin="1114,128,0,0" FontSize="18" FontFamily="Trebuchet MS" FontWeight="Bold" BorderBrush="#FF8B3F3F" HorizontalAlignment="Left" Width="116" Height="41" VerticalAlignment="Top"/>
+                    <Label Content="Temp. e deshiruar ne FTOHJE:" BorderThickness="2" Margin="872,174,0,0" FontSize="14" FontWeight="SemiBold" FontFamily="Trebuchet MS" BorderBrush="#FF8B3F3F" HorizontalAlignment="Left" Width="238" Height="41" VerticalAlignment="Top"/>
+                    <Button x:Name="btnIncVRFHeatSetpoint" FontSize="18" FontStretch="UltraExpanded" Width="56" Margin="1300,128,0,0" FontWeight="Bold" HorizontalAlignment="Left" Height="41" VerticalAlignment="Top" Click="BtnIncVRFHeatSetpoint_Click" >
+                        <Button.Background>
+                            <ImageBrush ImageSource="/ScadaOtrila;component/Resources/UP.png"/>
+                        </Button.Background>
+                    </Button>
+                    <Button x:Name="btnDecVRFHeatSetpoint" FontSize="18" FontStretch="UltraExpanded" Width="56" Margin="1238,128,0,0" FontWeight="Bold" Height="41" VerticalAlignment="Top" HorizontalAlignment="Left" Click="BtnDecVRFHeatSetpoint_Click" >
+                        <Button.Background>
+                            <ImageBrush ImageSource="/ScadaOtrila;component/Resources/DOWN.png"/>
+                        </Button.Background>
+                    </Button>
+                    <Button x:Name="btnIncVRFCoolSetpoint" FontSize="18" FontStretch="UltraExpanded" Width="56" Margin="1300,174,0,0" FontWeight="Bold" HorizontalAlignment="Left" Height="41" VerticalAlignment="Top" Click="BtnIncVRFCoolSetpoint_Click" >
+                        <Button.Background>
+                            <ImageBrush ImageSource="/ScadaOtrila;component/Resources/UP.png"/>
+                        </Button.Background>
+                    </Button>
+                    <Button x:Name="btnDecVRFCoolSetpoint" FontSize="18" FontStretch="UltraExpanded" Width="56" Margin="1238,174,0,0" FontWeight="Bold" Height="41" VerticalAlignment="Top" HorizontalAlignment="Left" Click="BtnDecVRFCoolSetpoint_Click" >
+                        <Button.Background>
+                            <ImageBrush ImageSource="/ScadaOtrila;component/Resources/DOWN.png"/>
+                        </Button.Background>
+                    </Button>
+                    <Label FontWeight="DemiBold" Content="Statusi dhe kontrolla e VRF" FontSize="20" Margin="872,20,0,0" Height="39" VerticalAlignment="Top" HorizontalAlignment="Left" Width="517" Foreground="Black"/>
+                    <Button x:Name="btnConfigDite" Content="Konfiguro Ditet" Click="BtnConfigDite_Click" HorizontalAlignment="Left" Width="166" Height="50" VerticalAlignment="Top" Margin="666,206,0,0"/>
+                    <Button x:Name="btnMenaxhoDitet" Content="Menaxho Ditet" Click="BtnMenaxhoDitet_Click" HorizontalAlignment="Left" Width="166" Height="50" VerticalAlignment="Top" Margin="666,138,0,0"/>
+                    <Button x:Name="btnOraret" Content="Menaxho Oraret" Click="BtnOraret_Click" HorizontalAlignment="Left" Width="166" Height="50" VerticalAlignment="Top" Margin="666,69,0,0"/>
                 </Grid>
             </TabItem>
-            <TabItem Name="VRF" Header="Parametrat e VRF">
+            <TabItem  Name="Oraret" Header="Oraret">
+                <Grid/>
+
+            </TabItem>
+
+            <TabItem Name="VRF" IsEnabled="False" Visibility="Hidden" Header="Parametrat e VRF">
                 <Grid>
                     <Grid.ColumnDefinitions>
                         <ColumnDefinition/>
                     </Grid.ColumnDefinitions>
-                    <Button x:Name="btnNgrohjeVRF" BorderThickness="1" Content="NGROHJE" Margin="131,11,0,0" FontWeight="Bold" FontSize="16" Click="BtnNgrohje_Click" HorizontalAlignment="Left" Width="116" Height="49" VerticalAlignment="Top"/>
-                    <Button x:Name="btnAutoVRF" BorderThickness="1" Content="AUTO" Margin="252,11,0,0" FontWeight="Bold" FontSize="16" Click="BtnAuto_Click" Height="49" VerticalAlignment="Top" HorizontalAlignment="Left" Width="116" />
-                    <Button x:Name="btnOffVRF" BorderThickness="1" Content="OFF" Margin="376,11,0,0" FontWeight="Bold" FontSize="16" Click="BtnOff_Click" HorizontalAlignment="Left" Width="116" Height="49" VerticalAlignment="Top"/>
-                    <Button x:Name="btnFtohjeVRF" BorderThickness="1" Content="FTOHJE" Margin="10,11,0,0" FontWeight="Bold" FontSize="16" Click="BtnFtohje_Click" HorizontalAlignment="Left" Width="116" Height="49" VerticalAlignment="Top"/>
-                    <TextBox x:Name="txtVRFCoolSetpoint" BorderThickness="2" TextAlignment="Center" TextWrapping="Wrap" Text="17" Margin="252,119,0,0" FontSize="18" FontFamily="Trebuchet MS" FontWeight="Bold" BorderBrush="#FF8B3F3F" Height="41" VerticalAlignment="Top" HorizontalAlignment="Left" Width="116"/>
-                    <Label Content="Temp. e deshiruar ne NGROHJE:"  BorderThickness="2" Margin="10,73,0,0" FontSize="14" FontWeight="Bold" FontFamily="Trebuchet MS" BorderBrush="#FF8B3F3F" HorizontalAlignment="Left" Width="237" Height="41" VerticalAlignment="Top"/>
-                    <TextBox x:Name="txtVRFHeatSetpoint" BorderThickness="2" TextAlignment="Center" TextWrapping="Wrap" Text="25" Margin="252,73,0,0" FontSize="18" FontFamily="Trebuchet MS" FontWeight="Bold" BorderBrush="#FF8B3F3F" HorizontalAlignment="Left" Width="116" Height="41" VerticalAlignment="Top"/>
-                    <Label Content="Temp. e deshiruar ne FTOHJE:" BorderThickness="2" Margin="10,119,0,0" FontSize="14" FontWeight="Bold" FontFamily="Trebuchet MS" BorderBrush="#FF8B3F3F" HorizontalAlignment="Left" Width="237" Height="41" VerticalAlignment="Top"/>
 
                     <!--Setpoint buttons-->
-                    <Button x:Name="btnIncVRFHeatSetpoint" Content="+" FontSize="18" FontStretch="UltraExpanded" Width="56" Margin="437,73,0,0" FontWeight="Bold" Background="#FFF1A0A0" HorizontalAlignment="Left" Height="41" VerticalAlignment="Top" Click="BtnIncVRFHeatSetpoint_Click" />
-                    <Button x:Name="btnDecVRFHeatSetpoint" Content="-" FontSize="18" FontStretch="UltraExpanded" Width="56" Margin="376,73,0,0" FontWeight="Bold" Background="#FFDBECF7" Height="41" VerticalAlignment="Top" HorizontalAlignment="Left" Click="BtnDecVRFHeatSetpoint_Click" />
-                    <Button x:Name="btnIncVRFCoolSetpoint" Content="+" FontSize="18" FontStretch="UltraExpanded" Width="56" Margin="437,119,0,0" FontWeight="Bold" Background="#FFF1A0A0" HorizontalAlignment="Left" Height="41" VerticalAlignment="Top" Click="BtnIncVRFCoolSetpoint_Click" />
-                    <Button x:Name="btnDecVRFCoolSetpoint" Content="-" FontSize="18" FontStretch="UltraExpanded" Width="56" Margin="376,119,0,0" FontWeight="Bold" Background="#FFDBECF7" Height="41" VerticalAlignment="Top" HorizontalAlignment="Left" Click="BtnDecVRFCoolSetpoint_Click" />
 
                     <!-- Fan VRF Hidden buttons-->
                     <Button Visibility="Hidden" x:Name="btnFanOffVRF" BorderThickness="2" Content="FAN OFF" Margin="376,65,424,357" Background="#FFB6B6B6" FontWeight="Bold" FontSize="16" Foreground="White"  BorderBrush="#FF8B3F3F" IsEnabled="False"/>
@@ -217,18 +268,10 @@
 
                 </Grid>
             </TabItem>
-            <TabItem  Name="Oraret" Header="Oraret">
-                <Grid>
-                    <Button x:Name="btnConfigDite" Content="Konfiguro Ditet" Margin="10,11,0,0" Click="BtnConfigDite_Click" HorizontalAlignment="Left" Width="167" Height="51" VerticalAlignment="Top"/>
-                    <Button x:Name="btnMenaxhoDitet" Content="Menaxho Ditet" Margin="198,11,0,0" Click="BtnMenaxhoDitet_Click" HorizontalAlignment="Left" Width="167" Height="51" VerticalAlignment="Top"/>
-                    <Button x:Name="btnOraret" Content="Menaxho Oraret" Margin="379,11,0,0" Click="BtnOraret_Click" HorizontalAlignment="Left" Width="167" Height="51" VerticalAlignment="Top"/>
-
-                </Grid>
-
-            </TabItem>
             <TabItem Visibility="Hidden" IsEnabled="False" Name="Trends1" Header="Historia e Temperatures"></TabItem>
             <TabItem Visibility="Hidden" IsEnabled="False" Name="Trends2" Header="Historia e Presionit"></TabItem>
             <TabItem Visibility="Hidden" IsEnabled="False" Name="Alarms1" Header="Alarmet"></TabItem>
+
 
         </TabControl>
 

@@ -669,6 +669,7 @@ namespace ScadaOtrila.Guis
                         break;
                     default: air_flow_sp = 300; break;
                 }
+                air_flow_sp += additionalAir;
                 if (air_flow_sp != ahu_air_in_setpoint)
                 {
                     try
@@ -802,7 +803,8 @@ namespace ScadaOtrila.Guis
 
         private void MenuOperators_Click(object sender, RoutedEventArgs e)
         {
-
+            //Gui change password add operators!
+            (new SystemOtrila.Operatoret(_operator)).ShowDialog();
         }
 
         private void menuOpcTagManagement_Click(object sender, RoutedEventArgs e)
@@ -813,13 +815,16 @@ namespace ScadaOtrila.Guis
 
         private void menuPrint_Click(object sender, RoutedEventArgs e)
         {
-
+            try
+            {
+                PrintDialog dlg = new PrintDialog();
+                if (dlg.ShowDialog() != true)
+                    return;
+                dlg.PrintVisual(mainGrid, "Trend");
+            }
+            catch (Exception ex) { }
         }
 
-        private void menuTagList_Click(object sender, RoutedEventArgs e)
-        {
-
-        }
 
         private void menuTrends_Click(object sender, RoutedEventArgs e)
         {
@@ -983,11 +988,11 @@ namespace ScadaOtrila.Guis
             string _event;
             if (hall_status[2])
             {
-                _event = "Salla 1 eshte deaktivizuar nga operatori " + _operator;
+                _event = "Salla 3 eshte deaktivizuar nga operatori " + _operator;
             }
             else
             {
-                _event = "Salla 1 eshte aktivizuar nga operatori " + _operator;
+                _event = "Salla 3 eshte aktivizuar nga operatori " + _operator;
             }
             (new DataOtrilaTableAdapters.EventLogsTableAdapter()).Insert(DateTime.Now, _operator, _event);
             AddToStack("CyBroOPC.DA2", "c15842.hall_active[2]", Convert.ToDouble(!hall_status[2]));
@@ -1067,12 +1072,12 @@ namespace ScadaOtrila.Guis
             int _val = 2;
             if (season == true)
             {
-                (new DataOtrilaTableAdapters.EventLogsTableAdapter()).Insert(DateTime.Now, _operator, "Operatori: " + _operator + " ndryshoi modin nga NGROHJE ne FTOHJE!");
+                (new DataOtrilaTableAdapters.EventLogsTableAdapter()).Insert(DateTime.Now, _operator, "Operatori: " + _operator + " ndryshoi modin nga Ftohje ne Ngrohje!");
                 _val = 0;
             }
             else if(season == false)
             {
-                (new DataOtrilaTableAdapters.EventLogsTableAdapter()).Insert(DateTime.Now, _operator, "Operatori: " + _operator + " ndryshoi modin nga FTOHJE ne NGROHJE!");
+                (new DataOtrilaTableAdapters.EventLogsTableAdapter()).Insert(DateTime.Now, _operator, "Operatori: " + _operator + " ndryshoi modin nga Ngrohje ne Ftohje!");
                 _val = 1;
             }
             AddToStack("CyBroOPC.DA2", "c15842.season", Convert.ToDouble(_val));
@@ -1096,12 +1101,13 @@ namespace ScadaOtrila.Guis
 
         private void BtnDecAirInSp_Click(object sender, RoutedEventArgs e)
         {
-
+            additionalAir -= 100;
         }
 
+        private float additionalAir = 0.0f;
         private void BtnIncAirInSp_Click(object sender, RoutedEventArgs e)
         {
-
+            additionalAir += 100;
         }
 
         private void BtnNxemsatOnOff_Click(object sender, RoutedEventArgs e)
@@ -1125,6 +1131,7 @@ namespace ScadaOtrila.Guis
         {
 
         }
+
         private void BtnIncRecycle_Click(object sender, RoutedEventArgs e)
         {
             try
@@ -1343,7 +1350,7 @@ namespace ScadaOtrila.Guis
                             {
                                 viewModelSalla = null;
                                 DateTime from = DateTime.Now;
-                                from = from.AddDays(-3);
+                                from = from.AddDays(-2);
 
                                 DateTime to = DateTime.Now;
                                 viewModelSalla = new TrendBrowserViewModelMT(1, from, to);
@@ -1361,7 +1368,7 @@ namespace ScadaOtrila.Guis
                             {
                                 viewModelSalla = null;
                                 DateTime from = DateTime.Now;
-                                from = from.AddDays(-3);
+                                from = from.AddDays(-2);
 
                                 DateTime to = DateTime.Now;
                                 viewModelSalla = new TrendBrowserViewModelMT(2, from, to);
@@ -1379,7 +1386,7 @@ namespace ScadaOtrila.Guis
                             {
                                 viewModelSalla = null;
                                 DateTime from = DateTime.Now;
-                                from = from.AddDays(-3);
+                                from = from.AddDays(-2);
 
                                 DateTime to = DateTime.Now;
                                 viewModelSalla = new TrendBrowserViewModelMT(3, from, to);

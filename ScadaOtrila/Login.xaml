@@ -16,11 +16,11 @@
         </Grid.RenderTransform>
         <Label Content="Përdoruesi"  HorizontalContentAlignment="Center" HorizontalAlignment="Left" Margin="167,24,0,0" VerticalAlignment="Top" Width="167" FontWeight="Bold"/>
         <Label Content="Fjalëkalimi" HorizontalContentAlignment="Center" HorizontalAlignment="Left" Margin="167,81,0,0" VerticalAlignment="Top" Width="167" RenderTransformOrigin="0.709,0.517" FontWeight="Bold"/>
-        <Button Name="btnOK" Content="OK" HorizontalAlignment="Left"  Margin="167,138,0,0" VerticalAlignment="Top" Width="167" Click="btnOK_Click"  BorderThickness="0" Height="37">
+        <Button Name="btnOK" Content="OK" HorizontalAlignment="Left"  Margin="167,138,0,0" VerticalAlignment="Top" Width="167" Click="btnOK_Click"  BorderThickness="0" Height="37" Foreground="White" FontWeight="Bold">
             <Button.Background>
                 <LinearGradientBrush EndPoint="0.5,1" StartPoint="0.5,0">
                     <GradientStop Color="Black" Offset="0"/>
-                    <GradientStop Color="#FF23FFCD" Offset="0.445"/>
+                    <GradientStop Color="#FF0C5457" Offset="0.445"/>
                 </LinearGradientBrush>
             </Button.Background>
         </Button>
