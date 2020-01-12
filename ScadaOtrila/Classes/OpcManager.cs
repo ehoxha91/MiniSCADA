@@ -211,7 +211,6 @@ namespace ScadaOtrila.Classes
                     if(e.Vtq.Quality.IsGood)
                     {
                         this.NewValue = Convert.ToInt32(e.Vtq.Value);
-
                         //Rise the event, as argument send the tag object.
                         EventHandler<OpcTag> h = OpcItemHasChanged; 
                         if (h != null)

@@ -19,6 +19,7 @@ using System.IO;
 using System.Diagnostics;
 using System.Globalization;
 using System.Windows.Threading;
+using System.Windows.Resources;
 
 namespace ScadaOtrila.Guis
 {
@@ -52,8 +53,8 @@ namespace ScadaOtrila.Guis
         private double ahu_humid_setpoint; //lageshtia e deshiruar
         private double ahu_recycle_setpoint; //recycle
         private double ahu_temp_out;
-        
 
+        private bool[] trend = new bool[3];
         //VRF
         VRFState vrfState = VRFState.AUTO;
         VRFState forDisplay = VRFState.AUTO;
@@ -79,8 +80,11 @@ namespace ScadaOtrila.Guis
             this.Activated += MainWindow_Activated;
             this.Closing += MainWindow_Closing;
             _operator = _user;
-            if (Properties.Settings.Default.SERIALNUMBER == "ejuphoxha123123otrila44" || DateTime.Now.Month <11)
+            if (Properties.Settings.Default.SERIALNUMBER == "ejuphoxha123123otrila44" || (DateTime.Now.Year<2020))
             {
+                trend[0] = false;
+                trend[1] = false;
+                trend[2] = false;
                 //Create serial port that we will use for ahu communication
                 ConfigSerial();
 
@@ -135,34 +139,34 @@ namespace ScadaOtrila.Guis
                 switch(tag.TagName)
                 {
                     case "TempSalla1":
-                        hall_temp[0] = (float)tag.Value;
+                        hall_temp[0] = tag.Value;
                         break;
                     case "TempSalla2":
-                        hall_temp[1] = (float)tag.Value;
+                        hall_temp[1] = tag.Value;
                         break;
                     case "TempSalla3":
-                        hall_temp[2] = (float)tag.Value;
+                        hall_temp[2] = tag.Value;
                         break;
                     case "TempSetpointS1":
-                        hall_temp_sp[0] = (float)tag.Value;
+                        hall_temp_sp[0] = tag.Value;
                         break;
                     case "TempSetpointS2":
-                        hall_temp_sp[1] = (float)tag.Value;
+                        hall_temp_sp[1] = tag.Value;
                         break;
                     case "TempSetpointS3":
-                        hall_temp_sp[2] = (float)tag.Value;
+                        hall_temp_sp[2] = tag.Value;
                         break;
                     case "PresioniSalla1":
-                        hall_press[0] = (float)tag.Value;
+                        hall_press[0] = tag.Value;
                         break;
                     case "PresioniSalla2":
-                        hall_press[1] = (float)tag.Value;
+                        hall_press[1] = tag.Value;
                         break;
                     case "PresioniSalla3":
-                        hall_press[2] = (float)tag.Value;
+                        hall_press[2] = tag.Value;
                         break;
                     case "PresureSetpS1":
-                        hall_press_sp[0] = (float)tag.Value;
+                        hall_press_sp[0] = tag.Value;
                         break;
                     case "PresureSetpS2":
                         hall_press_sp[1] = tag.Value;
@@ -550,19 +554,19 @@ namespace ScadaOtrila.Guis
                 }
                 catch (Exception ex){ File.WriteAllText("D:\\ErrorLogOtrilaScada.txt", ex.Message +"\nError reading setpoint temp\n"); }
 
-                //Outdoors Temp.
+                //AHU Output Temp.
                 try
                 {
                     vals4 = master.ReadHoldingRegisters(1, 45, 1);
-                    ahu_temp_out = Convert.ToDouble(vals4[0]) * 0.1;
+                    ahu_temp_current = Convert.ToDouble(vals4[0]) * 0.1;
                 }
                 catch (Exception ex) { File.WriteAllText("D:\\ErrorLogOtrilaScada.txt", ex.Message + "\nError reading current temp\n" ); }
 
-                //current temp
+                //Outdoors temp.
                 try
                 {
                     vals4 = master.ReadHoldingRegisters(1, 43, 1);
-                    ahu_temp_current = Convert.ToDouble(vals4[0]) * 0.1;
+                    ahu_temp_out = Convert.ToDouble(vals4[0]) * 0.1;
                 }
                 catch (Exception ex) { File.WriteAllText("D:\\ErrorLogOtrilaScada.txt", ex.Message + "\nError reading outside temp."); }
 
@@ -632,7 +636,7 @@ namespace ScadaOtrila.Guis
             {
                 int active_halls = 0;
                 double max_humid = 0.0;
-                for (int i = 0; i < 2; i++)
+                for (int i = 0; i <= 2; i++)
                 {
                     if (max_humid < hall_humid_sp[i])
                         max_humid = hall_humid_sp[i];
@@ -848,18 +852,18 @@ namespace ScadaOtrila.Guis
 
         #endregion
 
-        #region Buttons SALLA 1
+        #region Buttons SALLA 3
 
         private void BtnSalla1OnOff_Click(object sender, RoutedEventArgs e)
         {
             string _event;
             if(hall_status[0])
             {
-                _event = "Salla 1 eshte deaktivizuar nga operatori "+_operator;
+                _event = "Salla 3 eshte deaktivizuar nga operatori "+_operator;
             }
             else
             {
-                _event = "Salla 1 eshte aktivizuar nga operatori "+_operator;
+                _event = "Salla 3 eshte aktivizuar nga operatori "+_operator;
             }
             (new DataOtrilaTableAdapters.EventLogsTableAdapter()).Insert(DateTime.Now, _operator, _event);
             AddToStack("CyBroOPC.DA2", "c15842.hall_active[0]", Convert.ToDouble(!hall_status[0]));
@@ -868,7 +872,7 @@ namespace ScadaOtrila.Guis
         private void BtnIncTempS1_Click(object sender, RoutedEventArgs e) //""
         {
             hall_temp_sp[0] +=1;
-            (new DataOtrilaTableAdapters.EventLogsTableAdapter()).Insert(DateTime.Now, _operator, "Temperatura e deshiruar ne sallen 1 u ndryshua ne: "+hall_temp_sp[0].ToString()
+            (new DataOtrilaTableAdapters.EventLogsTableAdapter()).Insert(DateTime.Now, _operator, "Temperatura e deshiruar ne sallen 3 u ndryshua ne: "+hall_temp_sp[0].ToString()
                 + ". Nga Operatori: " + _operator);
             AddToStack("CyBroOPC.DA2", "c15842.temp_set[0]", hall_temp_sp[0]);
         }
@@ -876,7 +880,7 @@ namespace ScadaOtrila.Guis
         private void BtnDecTempS1_Click(object sender, RoutedEventArgs e)
         {
             hall_temp_sp[0] -= 1;
-            (new DataOtrilaTableAdapters.EventLogsTableAdapter()).Insert(DateTime.Now, _operator, "Temperatura e deshiruar ne sallen 1 u ndryshua ne: " + hall_temp_sp[0].ToString()
+            (new DataOtrilaTableAdapters.EventLogsTableAdapter()).Insert(DateTime.Now, _operator, "Temperatura e deshiruar ne sallen 3 u ndryshua ne: " + hall_temp_sp[0].ToString()
                 + ". Nga Operatori: " + _operator);
             AddToStack("CyBroOPC.DA2", "c15842.temp_set[0]", hall_temp_sp[0]);
         }
@@ -884,7 +888,7 @@ namespace ScadaOtrila.Guis
         private void BtnIncPresS1_Click(object sender, RoutedEventArgs e) //
         {
             hall_press_sp[0] += 5;
-            (new DataOtrilaTableAdapters.EventLogsTableAdapter()).Insert(DateTime.Now, _operator, "Presioni i deshiruar ne sallen 1 u ndryshua ne: " + hall_press_sp[0].ToString()
+            (new DataOtrilaTableAdapters.EventLogsTableAdapter()).Insert(DateTime.Now, _operator, "Presioni i deshiruar ne sallen 3 u ndryshua ne: " + hall_press_sp[0].ToString()
                 + ". Nga Operatori: " + _operator);
             AddToStack("CyBroOPC.DA2", "c15842.pressure_set[0]", hall_press_sp[0]);
         }
@@ -892,7 +896,7 @@ namespace ScadaOtrila.Guis
         private void BtnDecPresS1_Click(object sender, RoutedEventArgs e)
         {
             hall_press_sp[0] -= 5;
-            (new DataOtrilaTableAdapters.EventLogsTableAdapter()).Insert(DateTime.Now, _operator, "Presioni i deshiruar ne sallen 1 u ndryshua ne: " + hall_press_sp[0].ToString()
+            (new DataOtrilaTableAdapters.EventLogsTableAdapter()).Insert(DateTime.Now, _operator, "Presioni i deshiruar ne sallen 3 u ndryshua ne: " + hall_press_sp[0].ToString()
                 + ". Nga Operatori: " + _operator);
             AddToStack("CyBroOPC.DA2", "c15842.pressure_set[0]", hall_press_sp[0]);
         }
@@ -900,7 +904,7 @@ namespace ScadaOtrila.Guis
         private void BtnIncLagS1_Click(object sender, RoutedEventArgs e)
         {
             hall_humid_sp[0] += 5;
-            (new DataOtrilaTableAdapters.EventLogsTableAdapter()).Insert(DateTime.Now, _operator, "Lageshtia e deshiruar ne sallen 1 u ndryshua ne: " + hall_humid_sp[0].ToString()
+            (new DataOtrilaTableAdapters.EventLogsTableAdapter()).Insert(DateTime.Now, _operator, "Lageshtia e deshiruar ne sallen 3 u ndryshua ne: " + hall_humid_sp[0].ToString()
                 + ". Nga Operatori: " + _operator);
             AddToStack("CyBroOPC.DA2", "c15842.humid_set[0]", hall_humid_sp[0]);
         }
@@ -908,7 +912,7 @@ namespace ScadaOtrila.Guis
         private void BtnDecLagS1_Click(object sender, RoutedEventArgs e)
         {
             hall_humid_sp[0] -= 5;
-            (new DataOtrilaTableAdapters.EventLogsTableAdapter()).Insert(DateTime.Now, _operator, "Lageshtia e deshiruar ne sallen 1 u ndryshua ne: " + hall_humid_sp[0].ToString()
+            (new DataOtrilaTableAdapters.EventLogsTableAdapter()).Insert(DateTime.Now, _operator, "Lageshtia e deshiruar ne sallen 3 u ndryshua ne: " + hall_humid_sp[0].ToString()
                 + ". Nga Operatori: " + _operator);
             AddToStack("CyBroOPC.DA2", "c15842.humid_set[0]", hall_humid_sp[0]);
         }
@@ -981,18 +985,18 @@ namespace ScadaOtrila.Guis
 
         #endregion
 
-        #region Buttons SALLA 3
+        #region Buttons SALLA 1
 
         private void BtnSalla3OnOff_Click(object sender, RoutedEventArgs e)
         {
             string _event;
             if (hall_status[2])
             {
-                _event = "Salla 3 eshte deaktivizuar nga operatori " + _operator;
+                _event = "Salla 1 eshte deaktivizuar nga operatori " + _operator;
             }
             else
             {
-                _event = "Salla 3 eshte aktivizuar nga operatori " + _operator;
+                _event = "Salla 1 eshte aktivizuar nga operatori " + _operator;
             }
             (new DataOtrilaTableAdapters.EventLogsTableAdapter()).Insert(DateTime.Now, _operator, _event);
             AddToStack("CyBroOPC.DA2", "c15842.hall_active[2]", Convert.ToDouble(!hall_status[2]));
@@ -1001,7 +1005,7 @@ namespace ScadaOtrila.Guis
         private void BtnIncTempS3_Click(object sender, RoutedEventArgs e)
         {
             hall_temp_sp[2] += 1;
-            (new DataOtrilaTableAdapters.EventLogsTableAdapter()).Insert(DateTime.Now, _operator, "Temperatura e deshiruar ne sallen 3 u ndryshua ne: " + hall_temp_sp[2].ToString()
+            (new DataOtrilaTableAdapters.EventLogsTableAdapter()).Insert(DateTime.Now, _operator, "Temperatura e deshiruar ne sallen 1 u ndryshua ne: " + hall_temp_sp[2].ToString()
             + ". Nga Operatori: " + _operator);
             AddToStack("CyBroOPC.DA2", "c15842.temp_set[2]", hall_temp_sp[2]);
         }
@@ -1009,7 +1013,7 @@ namespace ScadaOtrila.Guis
         private void BtnDecTempS3_Click(object sender, RoutedEventArgs e)
         {
             hall_temp_sp[2] -=1;
-            (new DataOtrilaTableAdapters.EventLogsTableAdapter()).Insert(DateTime.Now, _operator, "Temperatura e deshiruar ne sallen 3 u ndryshua ne: " + hall_temp_sp[2].ToString()
+            (new DataOtrilaTableAdapters.EventLogsTableAdapter()).Insert(DateTime.Now, _operator, "Temperatura e deshiruar ne sallen 1 u ndryshua ne: " + hall_temp_sp[2].ToString()
 + ". Nga Operatori: " + _operator);
             AddToStack("CyBroOPC.DA2", "c15842.temp_set[2]", hall_temp_sp[2]);
         }
@@ -1017,7 +1021,7 @@ namespace ScadaOtrila.Guis
         private void BtnIncPresS3_Click(object sender, RoutedEventArgs e)
         {
             hall_press_sp[2] += 5;
-            (new DataOtrilaTableAdapters.EventLogsTableAdapter()).Insert(DateTime.Now, _operator, "Presioni i deshiruar ne sallen 3 u ndryshua ne: " + hall_press_sp[2].ToString()
+            (new DataOtrilaTableAdapters.EventLogsTableAdapter()).Insert(DateTime.Now, _operator, "Presioni i deshiruar ne sallen 1 u ndryshua ne: " + hall_press_sp[2].ToString()
 + ". Nga Operatori: " + _operator);
             AddToStack("CyBroOPC.DA2", "c15842.pressure_set[2]", hall_press_sp[2]);
         }
@@ -1025,7 +1029,7 @@ namespace ScadaOtrila.Guis
         private void BtnDecPresS3_Click(object sender, RoutedEventArgs e)
         {
             hall_press_sp[2] -= 5;
-            (new DataOtrilaTableAdapters.EventLogsTableAdapter()).Insert(DateTime.Now, _operator, "Presioni i deshiruar ne sallen 3 u ndryshua ne: " + hall_press_sp[2].ToString()
+            (new DataOtrilaTableAdapters.EventLogsTableAdapter()).Insert(DateTime.Now, _operator, "Presioni i deshiruar ne sallen 1 u ndryshua ne: " + hall_press_sp[2].ToString()
 + ". Nga Operatori: " + _operator);
             AddToStack("CyBroOPC.DA2", "c15842.pressure_set[2]", hall_press_sp[2]);
         }
@@ -1033,7 +1037,7 @@ namespace ScadaOtrila.Guis
         private void BtnIncLagS3_Click(object sender, RoutedEventArgs e)
         {
             hall_humid_sp[2] += 5;
-            (new DataOtrilaTableAdapters.EventLogsTableAdapter()).Insert(DateTime.Now, _operator, "Lageshtia e deshiruar ne sallen 3 u ndryshua ne: " + hall_humid_sp[2].ToString()
+            (new DataOtrilaTableAdapters.EventLogsTableAdapter()).Insert(DateTime.Now, _operator, "Lageshtia e deshiruar ne sallen 1 u ndryshua ne: " + hall_humid_sp[2].ToString()
     + ". Nga Operatori: " + _operator);
             AddToStack("CyBroOPC.DA2", "c15842.humid_set[2]", hall_humid_sp[2]);
         }
@@ -1041,7 +1045,7 @@ namespace ScadaOtrila.Guis
         private void BtnDecLagS3_Click(object sender, RoutedEventArgs e)
         {
             hall_humid_sp[2] -= 5;
-            (new DataOtrilaTableAdapters.EventLogsTableAdapter()).Insert(DateTime.Now, _operator, "Lageshtia e deshiruar ne sallen 3 u ndryshua ne: " + hall_humid_sp[2].ToString()
+            (new DataOtrilaTableAdapters.EventLogsTableAdapter()).Insert(DateTime.Now, _operator, "Lageshtia e deshiruar ne sallen 1 u ndryshua ne: " + hall_humid_sp[2].ToString()
     + ". Nga Operatori: " + _operator);
             AddToStack("CyBroOPC.DA2", "c15842.humid_set[2]", hall_humid_sp[2]);
         }
@@ -1323,15 +1327,15 @@ namespace ScadaOtrila.Guis
 
         private void TabControl_SelectionChanged(object sender, SelectionChangedEventArgs e)
         {
-            if (Salla1.IsSelected)
+            if (Salla1.IsSelected && trend[0])
             {
                 UpdatePlot(1);
             }
-            else if (Salla2.IsSelected)
+            else if (Salla2.IsSelected && trend[1])
             {
                 UpdatePlot(2);
             }
-            else if (Salla3.IsSelected)
+            else if (Salla3.IsSelected && trend[2])
             {
                 UpdatePlot(3);
             }
@@ -1350,7 +1354,7 @@ namespace ScadaOtrila.Guis
                             {
                                 viewModelSalla = null;
                                 DateTime from = DateTime.Now;
-                                from = from.AddDays(-2);
+                                from = from.AddDays(-1);
 
                                 DateTime to = DateTime.Now;
                                 viewModelSalla = new TrendBrowserViewModelMT(1, from, to);
@@ -1368,7 +1372,7 @@ namespace ScadaOtrila.Guis
                             {
                                 viewModelSalla = null;
                                 DateTime from = DateTime.Now;
-                                from = from.AddDays(-2);
+                                from = from.AddDays(-1);
 
                                 DateTime to = DateTime.Now;
                                 viewModelSalla = new TrendBrowserViewModelMT(2, from, to);
@@ -1386,7 +1390,7 @@ namespace ScadaOtrila.Guis
                             {
                                 viewModelSalla = null;
                                 DateTime from = DateTime.Now;
-                                from = from.AddDays(-2);
+                                from = from.AddDays(-1);
 
                                 DateTime to = DateTime.Now;
                                 viewModelSalla = new TrendBrowserViewModelMT(3, from, to);
@@ -1405,6 +1409,112 @@ namespace ScadaOtrila.Guis
 
         }
 
+        private void BtnTrendS1_Click(object sender, RoutedEventArgs e)
+        {
+            try
+            {
+                if (trend[0])
+                {
+                    Uri resourceUri = new Uri("Resources/TrendOFF.png", UriKind.Relative);
+                    StreamResourceInfo streamInfo = Application.GetResourceStream(resourceUri);
+
+                    BitmapFrame temp = BitmapFrame.Create(streamInfo.Stream);
+                    var brush = new ImageBrush();
+                    brush.ImageSource = temp;
+                    btnTrendS1.Background = brush;
+                    DataContext = null;
+                }
+                else
+                {
+                    Uri resourceUri = new Uri("Resources/TrendON.png", UriKind.Relative);
+                    StreamResourceInfo streamInfo = Application.GetResourceStream(resourceUri);
+
+                    BitmapFrame temp = BitmapFrame.Create(streamInfo.Stream);
+                    var brush = new ImageBrush();
+                    brush.ImageSource = temp;
+                    btnTrendS1.Background = brush;
+                    UpdatePlot(1);
+                }
+                trend[0] = !trend[0];
+
+            }
+            catch (Exception)
+            {
+
+            }
+        }
+
+        private void BtnTrendS2_Click(object sender, RoutedEventArgs e)
+        {
+            try
+            {
+                if (trend[1])
+                {
+                    Uri resourceUri = new Uri("Resources/TrendOFF.png", UriKind.Relative);
+                    StreamResourceInfo streamInfo = Application.GetResourceStream(resourceUri);
+
+                    BitmapFrame temp = BitmapFrame.Create(streamInfo.Stream);
+                    var brush = new ImageBrush();
+                    brush.ImageSource = temp;
+                    btnTrendS2.Background = brush;
+                    DataContext = null;
+                }
+                else
+                {
+                    Uri resourceUri = new Uri("Resources/TrendON.png", UriKind.Relative);
+                    StreamResourceInfo streamInfo = Application.GetResourceStream(resourceUri);
+
+                    BitmapFrame temp = BitmapFrame.Create(streamInfo.Stream);
+                    var brush = new ImageBrush();
+                    brush.ImageSource = temp;
+                    btnTrendS2.Background = brush;
+                    UpdatePlot(2);
+                }
+                trend[1] = !trend[1];
+
+            }
+            catch (Exception)
+            {
+
+            }
+        }
+
+        private void BtnTrendS3_Click(object sender, RoutedEventArgs e)
+        {
+            try
+            {
+                if (trend[2])
+                {
+                    Uri resourceUri = new Uri("Resources/TrendOFF.png", UriKind.Relative);
+                    StreamResourceInfo streamInfo = Application.GetResourceStream(resourceUri);
+
+                    BitmapFrame temp = BitmapFrame.Create(streamInfo.Stream);
+                    var brush = new ImageBrush();
+                    brush.ImageSource = temp;
+                    btnTrendS3.Background = brush;
+                    DataContext = null;
+                }
+                else
+                {
+                    Uri resourceUri = new Uri("Resources/TrendON.png", UriKind.Relative);
+                    StreamResourceInfo streamInfo = Application.GetResourceStream(resourceUri);
+
+                    BitmapFrame temp = BitmapFrame.Create(streamInfo.Stream);
+                    var brush = new ImageBrush();
+                    brush.ImageSource = temp;
+                    btnTrendS3.Background = brush;
+                    UpdatePlot(3);
+                }
+                trend[2] = !trend[2];
+
+            }
+            catch (Exception)
+            {
+
+            }
+        }
+
         #endregion
+
     }
 }

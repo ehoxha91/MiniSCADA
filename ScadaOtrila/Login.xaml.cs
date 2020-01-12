@@ -31,7 +31,6 @@ namespace ScadaOtrila
             Properties.Settings.Default.lastUser = username;    //Last username will always appear
             Properties.Settings.Default.Save();
 
-
             string password = Classes.EncryptionHelper.Encrypt(txtPassword.Password,"otrila");  //Convert to md5
 
             DataOtrilaTableAdapters.LoginTableAdapter login_ta = new DataOtrilaTableAdapters.LoginTableAdapter();   //Create a table adapter

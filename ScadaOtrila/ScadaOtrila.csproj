@@ -386,5 +386,9 @@
     <Resource Include="Resources\DOWN.png" />
     <Resource Include="Resources\UP.png" />
   </ItemGroup>
+  <ItemGroup>
+    <Resource Include="Resources\TrendOFF.png" />
+    <Resource Include="Resources\TrendON.png" />
+  </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
 </Project>
