@@ -40,7 +40,7 @@ namespace ScadaOtrila.Guis
         private double[] hall_humid_sp = new double[3];
         private bool[] hall_status = new bool[3];       //ON/OFF
         private double[] hall_damper_opening = new double[3];
-        private double[] hall_air_input_sp = new double[3];
+        private int[] hall_air_input_sp = new int[3];
         private bool season;
         private bool small_heaters;
 
@@ -80,13 +80,20 @@ namespace ScadaOtrila.Guis
             this.Activated += MainWindow_Activated;
             this.Closing += MainWindow_Closing;
             _operator = _user;
-            if (Properties.Settings.Default.SERIALNUMBER == "ejuphoxha123123otrila44" || (DateTime.Now.Year<2020))
+            if (Properties.Settings.Default.SERIALNUMBER == "ejuphoxha123123otrila44" || (DateTime.Now.Year<2021 && DateTime.Now.Month < 8))
             {
                 trend[0] = false;
                 trend[1] = false;
                 trend[2] = false;
                 //Create serial port that we will use for ahu communication
                 ConfigSerial();
+
+                hall_air_input_sp[2] = Properties.Settings.Default.AirSp1;
+                hall_air_input_sp[1] = Properties.Settings.Default.AirSp2;
+                hall_air_input_sp[0] = Properties.Settings.Default.AirSp3;
+                txtAirFlowSP1.Text = Properties.Settings.Default.AirSp1.ToString();
+                txtAirFlowSP2.Text = Properties.Settings.Default.AirSp2.ToString();
+                txtAirFlowSP3.Text = Properties.Settings.Default.AirSp3.ToString();
 
                 btnSeason.Content = " -- ";
                 btnSeason.Background = new SolidColorBrush(Colors.LightGray);
@@ -364,7 +371,11 @@ namespace ScadaOtrila.Guis
                 txtLagSet2.Text = hall_humid_sp[1].ToString() + " %";
                 txtLagSet3.Text = hall_humid_sp[2].ToString() + " %";
 
-                if(small_heaters)
+                txtDamper1.Text = (hall_damper_opening[2] / 10.0).ToString() + " %";
+                txtDamper2.Text = (hall_damper_opening[1] / 10.0).ToString() + " %";
+                txtDamper3.Text = (hall_damper_opening[0] / 10.0).ToString() + " %";
+
+                if (small_heaters)
                 {
                     btnNxemsatOnOff.Content = "Nxemsat ON";
                     btnNxemsatOnOff.Background = new SolidColorBrush(Colors.LightSalmon);
@@ -634,56 +645,88 @@ namespace ScadaOtrila.Guis
             }
             if(_modbusSerialPort.IsOpen)
             {
-                int active_halls = 0;
-                double max_humid = 0.0;
-                for (int i = 0; i <= 2; i++)
+                try
                 {
-                    if (max_humid < hall_humid_sp[i])
-                        max_humid = hall_humid_sp[i];
-                    if (hall_status[i])
-                        active_halls++;
-                }
-                max_humid = max_humid * 10;
-                if (max_humid != ahu_humid_current)
-                {
-                    try
+                    int active_halls = 0;
+                    double max_humid = 0.0;
+                    for (int i = 0; i <= 2; i++)
                     {
-                        master.WriteSingleRegister(1, 28, (ushort)max_humid);
+                        if (max_humid < hall_humid_sp[i])
+                            max_humid = hall_humid_sp[i];
+                        if (hall_status[i])
+                            active_halls++;
                     }
-                    catch (Exception ex)
+                    max_humid = max_humid * 10;
+                    if (max_humid != ahu_humid_current)
                     {
-                        File.WriteAllText("D:\\ErrorLogOtrilaScada.txt", ex.Message + ": Unable to write humidity setpoint! " + DateTime.Now.ToString());
+                        try
+                        {
+                            master.WriteSingleRegister(1, 28, (ushort)max_humid);
+                        }
+                        catch (Exception ex)
+                        {
+                            File.WriteAllText("D:\\ErrorLogOtrilaScada.txt", ex.Message + ": Unable to write humidity setpoint! " + DateTime.Now.ToString());
+                        }
                     }
-                }
 
-                double air_flow_sp = 0;
-                switch (active_halls)
-                {
-                    case 0:
-                        air_flow_sp = 300;
-                        break;
-                    case 1:
-                        air_flow_sp = 1500;
-                        break;
-                    case 2:
-                        air_flow_sp = 3700;
-                        break;
-                    case 3:
-                        air_flow_sp = 5900;
-                        break;
-                    default: air_flow_sp = 300; break;
+                    double air_flow_sp = 0;
+                    switch (active_halls)
+                    {
+                        case 0:
+                            air_flow_sp = 0;
+                            break;
+                        case 1:
+                            {
+                                if (hall_status[2])
+                                    air_flow_sp = hall_air_input_sp[2] * (hall_damper_opening[2] / 1000);
+                                else if (hall_status[1])
+                                    air_flow_sp = hall_air_input_sp[1] * (hall_damper_opening[1] / 1000);
+                                else if (hall_status[0])
+                                    air_flow_sp = hall_air_input_sp[0] * (hall_damper_opening[0] / 1000);
+                            }
+                            break;
+                        case 2:
+                            {
+                                if (hall_status[2] && hall_status[1])
+                                {
+                                    air_flow_sp = hall_air_input_sp[2] * (hall_damper_opening[2] / 1000) + hall_air_input_sp[1] * (hall_damper_opening[1] / 1000);
+                                }
+                                else if (hall_status[2] && hall_status[0])
+                                {
+                                    air_flow_sp = hall_air_input_sp[2] * (hall_damper_opening[2] / 1000) + hall_air_input_sp[0] * (hall_damper_opening[0] / 1000);
+                                }
+                                else if (hall_status[1] && hall_status[0])
+                                {
+                                    air_flow_sp = hall_air_input_sp[1] * (hall_damper_opening[1] / 1000) + hall_air_input_sp[0] * (hall_damper_opening[0] / 1000);
+                                }
+                            }
+                            break;
+                        case 3:
+                            {
+                                air_flow_sp = hall_air_input_sp[2] * (hall_damper_opening[2] / 1000)
+                                    + hall_air_input_sp[1] * (hall_damper_opening[1] / 1000)
+                                    + hall_air_input_sp[0] * (hall_damper_opening[0] / 1000);
+                            }
+                            break;
+                        default: air_flow_sp = 0; break;
+                    }
+
+                    air_flow_sp += additionalAir;
+                    if (air_flow_sp != ahu_air_in_setpoint)
+                    {
+                        try
+                        {
+                            master.WriteSingleRegister(1, 341, (ushort)air_flow_sp);
+                        }
+                        catch (Exception ex)
+                        {
+                            File.WriteAllText("D:\\ErrorLogOtrilaScada.txt", ex.Message + ": Unable to write air_flow setpoint! " + DateTime.Now.ToString());
+                        }
+                    }
                 }
-                air_flow_sp += additionalAir;
-                if (air_flow_sp != ahu_air_in_setpoint)
+                catch (Exception ex)
                 {
-                    try
-                    {
-                        master.WriteSingleRegister(1, 341, (ushort)air_flow_sp);
-                    }
-                    catch (Exception ex)
-                    {
-                        File.WriteAllText("D:\\ErrorLogOtrilaScada.txt", ex.Message + ": Unable to write air_flow setpoint! " + DateTime.Now.ToString());
-                    }
+                    File.WriteAllText("D:\\ErrorLogOtrilaScada.txt", ex.Message + ": " + DateTime.Now.ToString());
                 }
 
             }
@@ -729,8 +772,7 @@ namespace ScadaOtrila.Guis
         {
             if (vrfState == VRFState.AUTO && vrf_changed == true)
             {
-
-                switch(VRFTag)
+                switch (VRFTag)
                 {
                     case 0:
                         //Turn OFF
@@ -1164,7 +1206,50 @@ namespace ScadaOtrila.Guis
             }
         }
 
+        private void btnIncAirSp1_Click(object sender, RoutedEventArgs e)
+        {
+            txtAirFlowSP1.Text = Convert.ToString(Convert.ToInt32(txtAirFlowSP1.Text) + 100);
+            hall_air_input_sp[2] = Convert.ToInt32(txtAirFlowSP1.Text);
+            Properties.Settings.Default.AirSp1 = Convert.ToInt32(txtAirFlowSP1.Text);
+            Properties.Settings.Default.Save();
+        }
+        private void btnDecAirSp1_Click(object sender, RoutedEventArgs e)
+        {
+            txtAirFlowSP1.Text = Convert.ToString(Convert.ToInt32(txtAirFlowSP1.Text) - 100);
+            hall_air_input_sp[2] = Convert.ToInt32(txtAirFlowSP1.Text);
+            Properties.Settings.Default.AirSp1 = Convert.ToInt32(txtAirFlowSP1.Text);
+            Properties.Settings.Default.Save();
+        }
 
+        private void btnIncAirSp2_Click(object sender, RoutedEventArgs e)
+        {
+            txtAirFlowSP2.Text = Convert.ToString(Convert.ToInt32(txtAirFlowSP2.Text) + 100);
+            hall_air_input_sp[1] = Convert.ToInt32(txtAirFlowSP2.Text);
+            Properties.Settings.Default.AirSp2 = Convert.ToInt32(txtAirFlowSP2.Text);
+            Properties.Settings.Default.Save();
+        }
+        private void btnDecAirSp2_Click(object sender, RoutedEventArgs e)
+        {
+            txtAirFlowSP2.Text = Convert.ToString(Convert.ToInt32(txtAirFlowSP2.Text) - 100);
+            hall_air_input_sp[1] = Convert.ToInt32(txtAirFlowSP2.Text);
+            Properties.Settings.Default.AirSp2 = Convert.ToInt32(txtAirFlowSP2.Text);
+            Properties.Settings.Default.Save();
+        }
+
+        private void btnIncAirSp3_Click(object sender, RoutedEventArgs e)
+        {
+            txtAirFlowSP3.Text = Convert.ToString(Convert.ToInt32(txtAirFlowSP3.Text) + 100);
+            hall_air_input_sp[0] = Convert.ToInt32(txtAirFlowSP3.Text);
+            Properties.Settings.Default.AirSp3 = Convert.ToInt32(txtAirFlowSP3.Text);
+            Properties.Settings.Default.Save();
+        }
+        private void btnDecAirSp3_Click(object sender, RoutedEventArgs e)
+        {
+            txtAirFlowSP3.Text = Convert.ToString(Convert.ToInt32(txtAirFlowSP3.Text) - 100);
+            hall_air_input_sp[0] = Convert.ToInt32(txtAirFlowSP3.Text);
+            Properties.Settings.Default.AirSp3 = Convert.ToInt32(txtAirFlowSP3.Text);
+            Properties.Settings.Default.Save();
+        }
 
         #endregion
 
@@ -1357,7 +1442,7 @@ namespace ScadaOtrila.Guis
                                 from = from.AddDays(-1);
 
                                 DateTime to = DateTime.Now;
-                                viewModelSalla = new TrendBrowserViewModelMT(1, from, to);
+                                viewModelSalla = new TrendBrowserViewModelMT(3, from, to);
                                 DataContext = viewModelSalla;
                             }
                             catch (Exception ex)
@@ -1393,7 +1478,7 @@ namespace ScadaOtrila.Guis
                                 from = from.AddDays(-1);
 
                                 DateTime to = DateTime.Now;
-                                viewModelSalla = new TrendBrowserViewModelMT(3, from, to);
+                                viewModelSalla = new TrendBrowserViewModelMT(1, from, to);
                                 DataContext = viewModelSalla;
                             }
                             catch (Exception ex)
@@ -1433,7 +1518,7 @@ namespace ScadaOtrila.Guis
                     var brush = new ImageBrush();
                     brush.ImageSource = temp;
                     btnTrendS1.Background = brush;
-                    UpdatePlot(1);
+                    UpdatePlot(3);
                 }
                 trend[0] = !trend[0];
 
@@ -1503,7 +1588,7 @@ namespace ScadaOtrila.Guis
                     var brush = new ImageBrush();
                     brush.ImageSource = temp;
                     btnTrendS3.Background = brush;
-                    UpdatePlot(3);
+                    UpdatePlot(1);
                 }
                 trend[2] = !trend[2];
 
@@ -1514,7 +1599,13 @@ namespace ScadaOtrila.Guis
             }
         }
 
+
+
         #endregion
 
+        private void About_Click(object sender, RoutedEventArgs e)
+        {
+            MessageBox.Show("Per info kontakto: ejup.yup@hotmail.com");
+        }
     }
 }
